@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PendAdvisorTrainer", "PendAdvisorTrainer\PendAdvisorTrainer.csproj", "{9AB810BF-0FD5-46C2-B3CF-CFE5828579DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AB810BF-0FD5-46C2-B3CF-CFE5828579DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB810BF-0FD5-46C2-B3CF-CFE5828579DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB810BF-0FD5-46C2-B3CF-CFE5828579DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB810BF-0FD5-46C2-B3CF-CFE5828579DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFD016DF-646A-4298-800B-84865D6AB532}
+	EndGlobalSection
+EndGlobal
