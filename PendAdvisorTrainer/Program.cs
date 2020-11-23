@@ -1,8 +1,8 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using static Microsoft.ML.Transforms.ValueToKeyMappingEstimator;
 
 namespace PendAdvisorTrainer
 {
@@ -44,7 +44,6 @@ namespace PendAdvisorTrainer
          Console.WriteLine(metrics.ConfusionMatrix.GetFormattedConfusionTable());
 
          //Evaluate the model using cross-validation
-         Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Cross-validating the model...");
          var scores = context.MulticlassClassification.CrossValidate(data, pipeline, numberOfFolds: 5);
          var mean = scores.Average(s => s.Metrics.MacroAccuracy);
@@ -66,14 +65,13 @@ namespace PendAdvisorTrainer
 
          var prediction = predictor.Predict(input);
 
+         Console.WriteLine("Predictions and their scores (high to low)");
          int i = 0;
-         foreach (var score in prediction.Scores)
-         {
-            Console.WriteLine($"{i++} - {score:N8}");
-         }
-
+         predictor.ScoresByAction(prediction).Select(p => new { Idx = i++, Pred = p })
+                                             .OrderByDescending(a => a.Pred.Score).ToList()
+                                             .ForEach(a => Console.WriteLine($"{a.Idx}.{a.Pred.Label,8} - {a.Pred.Score:N8}"));
          Console.WriteLine();
-         Console.WriteLine($"Predicted action is {prediction.Action}.");
+         Console.WriteLine($"So, the predicted action is {prediction.Action}.");
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} ALL DONE!");
 
@@ -114,5 +112,23 @@ namespace PendAdvisorTrainer
 
       [ColumnName("PredictedLabel")]
       public string Action;
+   }
+
+   static class OutputHelpers
+   {
+      /// <summary>
+      /// Associate the Score column values with the corresponding prediction labels.
+      /// </summary>
+      /// <param name="predictor">Predicting engine (has the indes to prediction mapping defined during MapValueToKey conversion).</param>
+      /// <param name="output">Output predicted by the predictor (has just the scores array - no prediction values).</param>
+      /// <returns>A set of tuples (with Labels and corresponding Scores) in order of their indexes in the Score array.</returns>
+      internal static IEnumerable<(string Label, float Score)> ScoresByAction(this PredictionEngine<Input, Output> predictor, Output output)
+      {  //inspired by https://blog.hompus.nl/2020/09/14/get-all-prediction-scores-from-your-ml-net-model/
+         var labelBuffer = new VBuffer<ReadOnlyMemory<char>>();
+         predictor.OutputSchema["Score"].Annotations.GetValue("SlotNames", ref labelBuffer);
+         var labels = labelBuffer.DenseValues().Select(l => l.ToString());
+
+         return Enumerable.Zip(labels, output.Scores);
+      }
    }
 }
