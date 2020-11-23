@@ -1,5 +1,6 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Data;
+using Microsoft.ML.Trainers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,15 +24,21 @@ namespace PendAdvisorTrainer
          var testData = trainTestData.TestSet;
 
          // Build and train the model
+         var binaryTrainer = context.BinaryClassification.Trainers.SdcaLogisticRegression(); //binary classification trainer needed in case of OVA
+         //var trainer = context.MulticlassClassification.Trainers.OneVersusAll(binaryTrainer);
+         var trainer = context.MulticlassClassification.Trainers.SdcaMaximumEntropy();
          var pipeline = context.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: "StringLabel")
              .Append(context.Transforms.Categorical.OneHotEncoding(outputColumnName: "PosEncoded", inputColumnName: "Pos"))
              .Append(context.Transforms.Categorical.OneHotEncoding(outputColumnName: "ReasEncoded", inputColumnName: "Reas"))
              .Append(context.Transforms.Concatenate("Features", "ProcCd", "PosEncoded", "ReasEncoded", "TotChg"))
              .AppendCacheCheckpoint(context) //improve performance, but only for small/medium size data
-             .Append(context.MulticlassClassification.Trainers.SdcaMaximumEntropy())
+             .Append(trainer)
              .Append(context.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel"));
 
          Console.WriteLine($"{DateTime.Now} Training the model...");
+         var trainerType = trainer.GetType();
+         var binaryTrainerInfo = trainerType == typeof(OneVersusAllTrainer) ? $" with {binaryTrainer.GetType().Name}" : string.Empty;
+         Console.WriteLine($"Training algorithm used: {trainerType.Name}{binaryTrainerInfo}");
          var model = pipeline.Fit(trainData);
 
          //..model trained, create predicting engine early as it's needed to get the labelMap
