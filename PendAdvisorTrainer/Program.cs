@@ -17,7 +17,7 @@ namespace PendAdvisorTrainer
          // Load the data
          var data = context.Data.LoadFromTextFile<Input>(_dataPath, hasHeader: true, separatorChar: ',');
 
-         // Split the data into a training set and a test set
+         // Split the data into a training set (80%) and a test set (20%)
          var trainTestData = context.Data.TrainTestSplit(data, testFraction: 0.2, seed: 0);
          var trainData = trainTestData.TrainSet;
          var testData = trainTestData.TestSet;
@@ -27,6 +27,7 @@ namespace PendAdvisorTrainer
              .Append(context.Transforms.Categorical.OneHotEncoding(inputColumnName: "Pos", outputColumnName: "PosEncoded"))
              .Append(context.Transforms.Categorical.OneHotEncoding(inputColumnName: "Reas", outputColumnName: "ReasEncoded"))
              .Append(context.Transforms.Concatenate("Features", "ProcCd", "PosEncoded", "ReasEncoded", "TotChg"))
+             .AppendCacheCheckpoint(context) //improve performance, but only for small/medium size data
              .Append(context.MulticlassClassification.Trainers.SdcaMaximumEntropy())
              .Append(context.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
@@ -39,16 +40,20 @@ namespace PendAdvisorTrainer
          var predictions = model.Transform(testData);
          var metrics = context.MulticlassClassification.Evaluate(predictions);
 
-         Console.WriteLine($"Macro accuracy = {metrics.MacroAccuracy:P2}");
-         Console.WriteLine($"Micro accuracy = {metrics.MicroAccuracy:P2}");
+         Console.WriteLine($"Macro accuracy     = {metrics.MacroAccuracy:P2}");
+         Console.WriteLine($"Micro accuracy     = {metrics.MicroAccuracy:P2}");
+         Console.WriteLine($"Logarithmic Loss   = {metrics.LogLoss:N8}");
+         Console.WriteLine($"Log-Loss Reduction = {metrics.LogLossReduction:N8}");
          Console.WriteLine(metrics.ConfusionMatrix.GetFormattedConfusionTable());
 
          //Evaluate the model using cross-validation
          Console.WriteLine($"{DateTime.Now} Cross-validating the model...");
          var scores = context.MulticlassClassification.CrossValidate(data, pipeline, numberOfFolds: 5);
-         var mean = scores.Average(s => s.Metrics.MacroAccuracy);
 
-         Console.WriteLine($"Mean cross-validated macro accuracy: {mean:P2}");
+         Console.WriteLine($"Mean cross-validated macro accuracy: {scores.Average(s => s.Metrics.MacroAccuracy):P2}");
+         Console.WriteLine($"Mean cross-validated micro accuracy: {scores.Average(s => s.Metrics.MicroAccuracy):P2}");
+         Console.WriteLine($"Mean cross-validated log-loss      : {scores.Average(s => s.Metrics.LogLoss):N8}");
+         Console.WriteLine($"Mean cross-validated log-loss red. : {scores.Average(s => s.Metrics.LogLossReduction):N8}");
 
          // Use the model to make a prediction
          Console.WriteLine();
@@ -65,7 +70,7 @@ namespace PendAdvisorTrainer
 
          var prediction = predictor.Predict(input);
 
-         Console.WriteLine("Predictions and their scores (high to low)");
+         Console.WriteLine("Predictions and their scores (high to low):");
          int i = 0;
          predictor.ScoresByAction(prediction).Select(p => new { Idx = i++, Pred = p })
                                              .OrderByDescending(a => a.Pred.Score).ToList()
