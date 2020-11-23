@@ -23,16 +23,20 @@ namespace PendAdvisorTrainer
          var testData = trainTestData.TestSet;
 
          // Build and train the model
-         var pipeline = context.Transforms.Conversion.MapValueToKey("Label", inputColumnName: "StringLabel")
-             .Append(context.Transforms.Categorical.OneHotEncoding(inputColumnName: "Pos", outputColumnName: "PosEncoded"))
-             .Append(context.Transforms.Categorical.OneHotEncoding(inputColumnName: "Reas", outputColumnName: "ReasEncoded"))
+         var pipeline = context.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: "StringLabel")
+             .Append(context.Transforms.Categorical.OneHotEncoding(outputColumnName: "PosEncoded", inputColumnName: "Pos"))
+             .Append(context.Transforms.Categorical.OneHotEncoding(outputColumnName: "ReasEncoded", inputColumnName: "Reas"))
              .Append(context.Transforms.Concatenate("Features", "ProcCd", "PosEncoded", "ReasEncoded", "TotChg"))
              .AppendCacheCheckpoint(context) //improve performance, but only for small/medium size data
              .Append(context.MulticlassClassification.Trainers.SdcaMaximumEntropy())
-             .Append(context.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
+             .Append(context.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel"));
 
          Console.WriteLine($"{DateTime.Now} Training the model...");
          var model = pipeline.Fit(trainData);
+
+         //..model trained, create predicting engine early as it's needed to get the labelMap
+         var predictor = context.Model.CreatePredictionEngine<Input, Output>(model);
+         var labelMap = GetLabelMap(predictor);  //translates 0-based index to the actual value in the Label column.
 
          // Evaluate the model
          Console.WriteLine();
@@ -44,6 +48,10 @@ namespace PendAdvisorTrainer
          Console.WriteLine($"Micro accuracy     = {metrics.MicroAccuracy:P2}");
          Console.WriteLine($"Logarithmic Loss   = {metrics.LogLoss:N8}");
          Console.WriteLine($"Log-Loss Reduction = {metrics.LogLossReduction:N8}");
+         Console.WriteLine();
+         Console.WriteLine("Log-Loss values per class (Action):");
+         metrics.PerClassLogLoss.Zip(Enumerable.Range(0,int.MaxValue)).ToList().
+                                 ForEach(t => Console.WriteLine($"{t.Second}.{labelMap[t.Second],8} - {t.First:N8}")); //First = log-loss, Second = index
          Console.WriteLine(metrics.ConfusionMatrix.GetFormattedConfusionTable());
 
          //Evaluate the model using cross-validation
@@ -58,7 +66,6 @@ namespace PendAdvisorTrainer
          // Use the model to make a prediction
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Using the model to make prediction...");
-         var predictor = context.Model.CreatePredictionEngine<Input, Output>(model);
 
          var input = new Input
          {
@@ -70,11 +77,10 @@ namespace PendAdvisorTrainer
 
          var prediction = predictor.Predict(input);
 
-         Console.WriteLine("Predictions and their scores (high to low):");
-         int i = 0;
-         predictor.ScoresByAction(prediction).Select(p => new { Idx = i++, Pred = p })
-                                             .OrderByDescending(a => a.Pred.Score).ToList()
-                                             .ForEach(a => Console.WriteLine($"{a.Idx}.{a.Pred.Label,8} - {a.Pred.Score:N8}"));
+         prediction.Scores.Zip(Enumerable.Range(0,int.MaxValue))
+                          .OrderByDescending(t => t.First).ToList() //First = Score, Second = index
+                          .ForEach(t => Console.WriteLine($"{t.Second}.{labelMap[t.Second],8} - {t.First:N8}"));
+
          Console.WriteLine();
          Console.WriteLine($"So, the predicted action is {prediction.Action}.");
          Console.WriteLine();
@@ -85,6 +91,23 @@ namespace PendAdvisorTrainer
          Console.ReadKey();
 #endif
       }
+
+   
+      /// <summary>
+      /// Return a cross-reference between a 0-based index to the actual value in the Label column.
+      /// </summary>
+      /// <param name="predictor">Predicting engine (has the index to prediction mapping defined during MapValueToKey conversion).</param>
+      /// <returns></returns>
+      private static Dictionary<int, string> GetLabelMap(PredictionEngine<Input, Output> predictor)
+      {  //inspired by https://blog.hompus.nl/2020/09/14/get-all-prediction-scores-from-your-ml-net-model/
+         var labelBuffer = new VBuffer<ReadOnlyMemory<char>>();
+         predictor.OutputSchema["Score"].Annotations.GetValue("SlotNames", ref labelBuffer);
+         var labels = labelBuffer.DenseValues().Select(l => l.ToString());
+
+         int i = 0;
+         return labels.ToDictionary(_ => i++, l => l);
+      }
+
    }
 
 
@@ -119,21 +142,4 @@ namespace PendAdvisorTrainer
       public string Action;
    }
 
-   static class OutputHelpers
-   {
-      /// <summary>
-      /// Associate the Score column values with the corresponding prediction labels.
-      /// </summary>
-      /// <param name="predictor">Predicting engine (has the indes to prediction mapping defined during MapValueToKey conversion).</param>
-      /// <param name="output">Output predicted by the predictor (has just the scores array - no prediction values).</param>
-      /// <returns>A set of tuples (with Labels and corresponding Scores) in order of their indexes in the Score array.</returns>
-      internal static IEnumerable<(string Label, float Score)> ScoresByAction(this PredictionEngine<Input, Output> predictor, Output output)
-      {  //inspired by https://blog.hompus.nl/2020/09/14/get-all-prediction-scores-from-your-ml-net-model/
-         var labelBuffer = new VBuffer<ReadOnlyMemory<char>>();
-         predictor.OutputSchema["Score"].Annotations.GetValue("SlotNames", ref labelBuffer);
-         var labels = labelBuffer.DenseValues().Select(l => l.ToString());
-
-         return Enumerable.Zip(labels, output.Scores);
-      }
-   }
 }
