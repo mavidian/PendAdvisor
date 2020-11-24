@@ -31,26 +31,20 @@ namespace PendAdvisorTrainer
          Console.WriteLine($"Training algorithm used: {algorithmDesc}");
 
          //Train the model
-         var model = trainingPipeline.Fit(trainData);
+         ITransformer mlModel = trainingPipeline.Fit(trainData);
 
          //..model trained, create predicting engine early as it's needed to get the labelMap
-         var predictor = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(model);
+         var predictor = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
          var labelMap = GetLabelMap(predictor);  //translates 0-based index to the actual value in the Label column.
 
          // Evaluate quality of the model
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Evaluating the model...");
-         var predictions = model.Transform(testData);
+         var predictions = mlModel.Transform(testData);
          var metrics = _mlContext.MulticlassClassification.Evaluate(predictions);
 
          Console.WriteLine($"Macro accuracy = {metrics.MacroAccuracy:P2}");
          Console.WriteLine($"Micro accuracy = {metrics.MicroAccuracy:P2}");
-         //Console.WriteLine($"Logarithmic Loss   = {metrics.LogLoss:N8}");
-         //Console.WriteLine($"Log-Loss Reduction = {metrics.LogLossReduction:N8}");
-         //Console.WriteLine();
-         //Console.WriteLine("Log-Loss values per class (Action):");
-         //metrics.PerClassLogLoss.Zip(Enumerable.Range(0,int.MaxValue)).ToList().
-         //                        ForEach(t => Console.WriteLine($"{t.Second}.{labelMap[t.Second],8} - {t.First:N8}")); //First = log-loss, Second = index
          Console.WriteLine(metrics.ConfusionMatrix.GetFormattedConfusionTable());
 
          if (!_skipCrossValidation)
@@ -61,8 +55,6 @@ namespace PendAdvisorTrainer
 
             Console.WriteLine($"Mean cross-validated macro accuracy = {scores.Average(s => s.Metrics.MacroAccuracy):P2}");
             Console.WriteLine($"Mean cross-validated micro accuracy = {scores.Average(s => s.Metrics.MicroAccuracy):P2}");
-            //Console.WriteLine($"Mean cross-validated log-loss      : {scores.Average(s => s.Metrics.LogLoss):N8}");
-            //Console.WriteLine($"Mean cross-validated log-loss red. : {scores.Average(s => s.Metrics.LogLossReduction):N8}");
          }
 
          // Use the model to make a prediction
