@@ -3,7 +3,9 @@ using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using static Microsoft.ML.TrainCatalogBase;
 
 namespace PendAdvisorTrainer
 {
@@ -14,24 +16,25 @@ namespace PendAdvisorTrainer
 
       private static MLContext _mlContext = new MLContext(seed: 1);
 
+      private static string _mlNetModelPath = Path.GetFullPath("MLModel.zip");
+
       static void Main(string[] args)
       {
          // Load the data
-         var data = _mlContext.Data.LoadFromTextFile<ModelInput>(_dataPath, hasHeader: true, separatorChar: ',');
+         var allData = _mlContext.Data.LoadFromTextFile<ModelInput>(_dataPath, hasHeader: true, separatorChar: ',');
 
          // Split the data into a training set (80%) and a test set (20%)
-         var trainTestData = _mlContext.Data.TrainTestSplit(data, testFraction: 0.2, seed: 0);
+         var trainTestData = _mlContext.Data.TrainTestSplit(allData, testFraction: 0.2, seed: 0);
          var trainData = trainTestData.TrainSet;
          var testData = trainTestData.TestSet;
 
          //Build training pipeline
          (IEstimator<ITransformer> trainingPipeline, string algorithmDesc) = BuildTrainingPipeline();
 
+         //Train the model
          Console.WriteLine($"{DateTime.Now} Training the model...");
          Console.WriteLine($"Training algorithm used: {algorithmDesc}");
-
-         //Train the model
-         ITransformer mlModel = trainingPipeline.Fit(trainData);
+         ITransformer mlModel = TrainModel(trainingPipeline, trainData);
 
          //..model trained, create predicting engine early as it's needed to get the labelMap
          var predictor = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
@@ -40,24 +43,20 @@ namespace PendAdvisorTrainer
          // Evaluate quality of the model
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Evaluating the model...");
-         var predictions = mlModel.Transform(testData);
-         var metrics = _mlContext.MulticlassClassification.Evaluate(predictions);
+         (var metrics, var crossValidationMetrics) = EvaluateModel(mlModel, testData, trainingPipeline, allData);
 
          Console.WriteLine($"Macro accuracy = {metrics.MacroAccuracy:P2}");
          Console.WriteLine($"Micro accuracy = {metrics.MicroAccuracy:P2}");
          Console.WriteLine(metrics.ConfusionMatrix.GetFormattedConfusionTable());
 
-         if (!_skipCrossValidation)
+         if (crossValidationMetrics == null) Console.WriteLine("Cross-validation skipped.");
+         else
          {
-            //Evaluate the model using cross-validation
-            Console.WriteLine($"{DateTime.Now} Cross-validating the model...");
-            var scores = _mlContext.MulticlassClassification.CrossValidate(data, trainingPipeline, numberOfFolds: 5);
-
-            Console.WriteLine($"Mean cross-validated macro accuracy = {scores.Average(s => s.Metrics.MacroAccuracy):P2}");
-            Console.WriteLine($"Mean cross-validated micro accuracy = {scores.Average(s => s.Metrics.MicroAccuracy):P2}");
+            Console.WriteLine($"Mean cross-validated macro accuracy = {crossValidationMetrics.Average(s => s.Metrics.MacroAccuracy):P2}");
+            Console.WriteLine($"Mean cross-validated micro accuracy = {crossValidationMetrics.Average(s => s.Metrics.MicroAccuracy):P2}");
          }
 
-         // Use the model to make a prediction
+         // Use the model to make a sample prediction
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Using the model to make prediction...");
 
@@ -78,6 +77,12 @@ namespace PendAdvisorTrainer
 
          Console.WriteLine();
          Console.WriteLine($"So, the predicted action is {prediction.Action}.");
+
+         // Save the trained model to a .ZIP file
+         Console.WriteLine();
+         Console.WriteLine($"{DateTime.Now} Saving the trained model into {_mlNetModelPath} file...");
+         SaveModel(mlModel, allData.Schema, _mlNetModelPath);
+
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} ALL DONE!");
 
@@ -95,10 +100,10 @@ namespace PendAdvisorTrainer
       private static (IEstimator<ITransformer> TrainingPipeline, string AlgorithmDesc) BuildTrainingPipeline()
       {
          string binaryTrainerName = string.Empty;
-         var binaryTrainer = _mlContext.BinaryClassification.Trainers.SdcaLogisticRegression(); //binary classification trainer needed in case of OVA
-         binaryTrainerName = binaryTrainer.GetType().Name;
-         var trainer = _mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryTrainer);
-         //var trainer = _mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy();
+         //var binaryTrainer = _mlContext.BinaryClassification.Trainers.SdcaLogisticRegression(); //binary classification trainer needed in case of OVA
+         //binaryTrainerName = binaryTrainer.GetType().Name;
+         //var trainer = _mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryTrainer);
+         var trainer = _mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy();
          var pipeline = _mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: "StringLabel")
              .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PosEncoded", inputColumnName: "Pos"))
              .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "ReasEncoded", inputColumnName: "Reas"))
@@ -111,6 +116,55 @@ namespace PendAdvisorTrainer
          var algorithmDesc = trainerType == typeof(OneVersusAllTrainer) ? $"{trainerType.Name} with {binaryTrainerName}" : trainerType.Name;
          return (pipeline, algorithmDesc);
       }
+
+
+      /// <summary>
+      /// Train the model.
+      /// </summary>
+      /// <param name="trainingPipeline">Pipeline for model training.</param>
+      /// <param name="trainData">Training data view.</param>
+      /// <returns>The trained model.</returns>
+      public static ITransformer TrainModel( IEstimator<ITransformer> trainingPipeline, IDataView trainData)
+      {
+         return trainingPipeline.Fit(trainData);
+      }
+
+
+      /// <summary>
+      /// Evaluate the model quality.
+      /// </summary>
+      /// <param name="mlModel"></param>
+      /// <param name="testData">Data view to evaluate the model.</param>
+      /// <param name="trainingPipeline">Pipeline for model training.</param>
+      /// <param name="allData">Data view to be used by cross validation.</param>
+      /// <returns>A tuple containing evaluation metrics and metrics from cross validation (2nd element is null in case cross validation is skipped).</returns>
+      private static (MulticlassClassificationMetrics Metrics,
+                      IEnumerable<CrossValidationResult<MulticlassClassificationMetrics>> CrossValidationMetrics) EvaluateModel(
+                           ITransformer mlModel, IDataView testData, IEstimator<ITransformer> trainingPipeline, IDataView allData)
+      {
+         var predictions = mlModel.Transform(testData);
+         var metrics = _mlContext.MulticlassClassification.Evaluate(predictions);
+         IEnumerable<CrossValidationResult<MulticlassClassificationMetrics>> crossValidationMetrics = null;
+         if (!_skipCrossValidation)
+         {
+            //Evaluate the model using cross-validation
+            crossValidationMetrics = _mlContext.MulticlassClassification.CrossValidate(allData, trainingPipeline, numberOfFolds: 5);
+         }
+         return (metrics, crossValidationMetrics);
+      }
+
+
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="mlModel"></param>
+      /// <param name="modelInputSchema"></param>
+      /// <param name="modelPath"></param>
+      private static void SaveModel(ITransformer mlModel, DataViewSchema modelInputSchema, string modelPath)
+      {
+         _mlContext.Model.Save(mlModel, modelInputSchema, modelPath);
+      }
+
 
       /// <summary>
       /// Return a cross-reference between a 0-based index to the actual value in the Label column.
