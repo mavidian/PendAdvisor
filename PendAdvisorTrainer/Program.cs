@@ -7,50 +7,41 @@ using System.Linq;
 
 namespace PendAdvisorTrainer
 {
-   class Program
+   public class Program
    {
-      static readonly string _dataPath = "..\\..\\..\\Data\\MockClaims.csv";
-      static readonly bool _skipCrossValidation = true;
+      private static readonly string _dataPath = "..\\..\\..\\Data\\MockClaims.csv";
+      private static readonly bool _skipCrossValidation = true;
+
+      private static MLContext _mlContext = new MLContext(seed: 1);
 
       static void Main(string[] args)
       {
-         var mlContext = new MLContext(seed: 0);
-
          // Load the data
-         var data = mlContext.Data.LoadFromTextFile<ModelInput>(_dataPath, hasHeader: true, separatorChar: ',');
+         var data = _mlContext.Data.LoadFromTextFile<ModelInput>(_dataPath, hasHeader: true, separatorChar: ',');
 
          // Split the data into a training set (80%) and a test set (20%)
-         var trainTestData = mlContext.Data.TrainTestSplit(data, testFraction: 0.2, seed: 0);
+         var trainTestData = _mlContext.Data.TrainTestSplit(data, testFraction: 0.2, seed: 0);
          var trainData = trainTestData.TrainSet;
          var testData = trainTestData.TestSet;
 
-         // Build and train the model
-         var binaryTrainer = mlContext.BinaryClassification.Trainers.SdcaLogisticRegression(); //binary classification trainer needed in case of OVA
-         //var trainer = context.MulticlassClassification.Trainers.OneVersusAll(binaryTrainer);
-         var trainer = mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy();
-         var pipeline = mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: "StringLabel")
-             .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PosEncoded", inputColumnName: "Pos"))
-             .Append(mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "ReasEncoded", inputColumnName: "Reas"))
-             .Append(mlContext.Transforms.Concatenate("Features", "ProcCd", "PosEncoded", "ReasEncoded", "TotChg"))
-             .AppendCacheCheckpoint(mlContext) //improve performance, but only for small/medium size data
-             .Append(trainer)
-             .Append(mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel"));
+         //Build training pipeline
+         (IEstimator<ITransformer> trainingPipeline, string algorithmDesc) = BuildTrainingPipeline();
 
          Console.WriteLine($"{DateTime.Now} Training the model...");
-         var trainerType = trainer.GetType();
-         var binaryTrainerInfo = trainerType == typeof(OneVersusAllTrainer) ? $" with {binaryTrainer.GetType().Name}" : string.Empty;
-         Console.WriteLine($"Training algorithm used: {trainerType.Name}{binaryTrainerInfo}");
-         var model = pipeline.Fit(trainData);
+         Console.WriteLine($"Training algorithm used: {algorithmDesc}");
+
+         //Train the model
+         var model = trainingPipeline.Fit(trainData);
 
          //..model trained, create predicting engine early as it's needed to get the labelMap
-         var predictor = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(model);
+         var predictor = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(model);
          var labelMap = GetLabelMap(predictor);  //translates 0-based index to the actual value in the Label column.
 
-         // Evaluate the model
+         // Evaluate quality of the model
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Evaluating the model...");
          var predictions = model.Transform(testData);
-         var metrics = mlContext.MulticlassClassification.Evaluate(predictions);
+         var metrics = _mlContext.MulticlassClassification.Evaluate(predictions);
 
          Console.WriteLine($"Macro accuracy = {metrics.MacroAccuracy:P2}");
          Console.WriteLine($"Micro accuracy = {metrics.MicroAccuracy:P2}");
@@ -66,7 +57,7 @@ namespace PendAdvisorTrainer
          {
             //Evaluate the model using cross-validation
             Console.WriteLine($"{DateTime.Now} Cross-validating the model...");
-            var scores = mlContext.MulticlassClassification.CrossValidate(data, pipeline, numberOfFolds: 5);
+            var scores = _mlContext.MulticlassClassification.CrossValidate(data, trainingPipeline, numberOfFolds: 5);
 
             Console.WriteLine($"Mean cross-validated macro accuracy = {scores.Average(s => s.Metrics.MacroAccuracy):P2}");
             Console.WriteLine($"Mean cross-validated micro accuracy = {scores.Average(s => s.Metrics.MicroAccuracy):P2}");
@@ -104,7 +95,31 @@ namespace PendAdvisorTrainer
 #endif
       }
 
-   
+
+      /// <summary>
+      /// Build the pipeline for model training
+      /// </summary>
+      /// <returns>Tuple consisting of the pipeline and description of the trainer (algorithm).</returns>
+      private static (IEstimator<ITransformer> TrainingPipeline, string AlgorithmDesc) BuildTrainingPipeline()
+      {
+         string binaryTrainerName = string.Empty;
+         var binaryTrainer = _mlContext.BinaryClassification.Trainers.SdcaLogisticRegression(); //binary classification trainer needed in case of OVA
+         binaryTrainerName = binaryTrainer.GetType().Name;
+         var trainer = _mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryTrainer);
+         //var trainer = _mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy();
+         var pipeline = _mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: "StringLabel")
+             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PosEncoded", inputColumnName: "Pos"))
+             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "ReasEncoded", inputColumnName: "Reas"))
+             .Append(_mlContext.Transforms.Concatenate("Features", "ProcCd", "PosEncoded", "ReasEncoded", "TotChg"))
+             .AppendCacheCheckpoint(_mlContext) //improve performance, but only for small/medium size data
+             .Append(trainer)
+             .Append(_mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel"));
+
+         var trainerType = trainer.GetType();
+         var algorithmDesc = trainerType == typeof(OneVersusAllTrainer) ? $"{trainerType.Name} with {binaryTrainerName}" : trainerType.Name;
+         return (pipeline, algorithmDesc);
+      }
+
       /// <summary>
       /// Return a cross-reference between a 0-based index to the actual value in the Label column.
       /// </summary>
