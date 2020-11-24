@@ -1,9 +1,9 @@
 ﻿using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;
+using PendAdvisorModel;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using static Microsoft.ML.TrainCatalogBase;
 
@@ -15,8 +15,6 @@ namespace PendAdvisorTrainer
       private static readonly bool _skipCrossValidation = true;
 
       private static MLContext _mlContext = new MLContext(seed: 1);
-
-      private static string _mlNetModelPath = Path.GetFullPath("MLModel.zip");
 
       static void Main(string[] args)
       {
@@ -80,8 +78,8 @@ namespace PendAdvisorTrainer
 
          // Save the trained model to a .ZIP file
          Console.WriteLine();
-         Console.WriteLine($"{DateTime.Now} Saving the trained model into {_mlNetModelPath} file...");
-         SaveModel(mlModel, allData.Schema, _mlNetModelPath);
+         Console.WriteLine($"{DateTime.Now} Saving the trained model into {PendPredictor.PathToModelLocation} file...");
+         SaveModel(mlModel, allData.Schema, PendPredictor.PathToModelLocation);
 
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} ALL DONE!");
@@ -180,39 +178,5 @@ namespace PendAdvisorTrainer
          int i = 0;
          return labels.ToDictionary(_ => i++, l => l);
       }
-
    }
-
-
-   class ModelInput
-   {
-      [LoadColumn(6)]
-      public float ProcCd;
-
-      ////[LoadColumn(7)]
-      ////public string Dx;
-
-      [LoadColumn(8)]
-      public string Pos;
-
-      [LoadColumn(9)]
-      public string Reas;
-
-      [LoadColumn(10)]
-      public float TotChg;
-
-      [LoadColumn(11), ColumnName("StringLabel")]
-      public string Action;
-   }
-
-
-   class ModelOutput
-   {
-      [ColumnName("Score")]
-      public float[] Scores;
-
-      [ColumnName("PredictedLabel")]
-      public string Action;
-   }
-
 }
