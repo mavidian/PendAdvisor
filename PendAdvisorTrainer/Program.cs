@@ -4,6 +4,7 @@ using Microsoft.ML.Trainers;
 using PendAdvisorModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using static Microsoft.ML.TrainCatalogBase;
 
@@ -160,6 +161,7 @@ namespace PendAdvisorTrainer
       /// <param name="modelPath"></param>
       private static void SaveModel(ITransformer mlModel, DataViewSchema modelInputSchema, string modelPath)
       {
+         Directory.CreateDirectory(Path.GetDirectoryName(modelPath)); //make sure location to save the model exists
          _mlContext.Model.Save(mlModel, modelInputSchema, modelPath);
       }
 

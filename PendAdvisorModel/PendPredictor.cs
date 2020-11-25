@@ -1,12 +1,20 @@
 ﻿using Microsoft.ML;
 using System;
 using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace PendAdvisorModel
 {
    public static class PendPredictor
    {
-      public static string PathToModelLocation { get; } = Path.GetFullPath("MLModel.zip");
+      // The model (MLModel.zip file) needs to reside in an arbitrary location accessible from multiple projects.
+      // Here, we're placing it in a subfolder of this source file at the compile time.
+      //TODO: refactor for truly arbitrary location.
+      private static char sep = Path.DirectorySeparatorChar;
+      public static string PathToModelLocation { get; } = Path.GetDirectoryName(SourcePathAtCompile()) + $"{sep}MlModel{sep}MLModel.zip";
+
+      private static string SourcePathAtCompile([CallerFilePath] string thisFilePath = null) { return thisFilePath; }
 
       public static ModelOutput Predict(ModelInput input)
       {
