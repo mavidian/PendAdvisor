@@ -4,6 +4,7 @@ using Microsoft.ML.Trainers;
 using PendAdvisorModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using static Microsoft.ML.TrainCatalogBase;
@@ -12,7 +13,8 @@ namespace PendAdvisorTrainer
 {
    public class Program
    {
-      private static readonly string _dataPath = "..\\..\\..\\Data\\MockClaims.csv";
+      private static readonly char sep = Path.DirectorySeparatorChar;
+      private static readonly string _dataPath = $"..{sep}..{sep}..{sep}Data{sep}MockClaims.csv";
       private static readonly bool _skipCrossValidation = true;
 
       private static MLContext _mlContext = new MLContext(seed: 1);
@@ -85,10 +87,11 @@ namespace PendAdvisorTrainer
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} ALL DONE!");
 
-#if DEBUG
-         Console.Write("Press any key to continue . . . ");
-         Console.ReadKey();
-#endif
+         if (Debugger.IsAttached)
+         {
+            Console.Write("Press any key to continue . . . ");
+            Console.ReadKey();
+         }
       }
 
 
