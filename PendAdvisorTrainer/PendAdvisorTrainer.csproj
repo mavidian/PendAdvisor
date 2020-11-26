@@ -4,6 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Copyright>Copyright © 2020 Mavidian Technologies Limited Liability Company. All Rights Reserved.</Copyright>
+    <Authors>Wojtek Dziegielewski</Authors>
+    <Company>Mavidian Technologies</Company>
   </PropertyGroup>
 
   <ItemGroup>

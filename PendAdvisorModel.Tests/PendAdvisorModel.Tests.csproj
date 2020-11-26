@@ -4,6 +4,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <Copyright>Copyright © 2020 Mavidian Technologies Limited Liability Company. All Rights Reserved.</Copyright>
+
+    <Company>Mavidian Technologies</Company>
+
+    <Authors>Wojtek Dziegielewski</Authors>
   </PropertyGroup>
 
   <ItemGroup>

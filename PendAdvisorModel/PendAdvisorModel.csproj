@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Mavidian Technologies</Company>
+    <Authors>Wojtek Dziegielewski</Authors>
   </PropertyGroup>
 
   <ItemGroup>
