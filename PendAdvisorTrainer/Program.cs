@@ -37,10 +37,6 @@ namespace PendAdvisorTrainer
          Console.WriteLine($"Training algorithm used: {algorithmDesc}");
          ITransformer mlModel = TrainModel(trainingPipeline, trainData);
 
-         //..model trained, create predicting engine early as it's needed to get the labelMap
-         var predictor = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
-         var labelMap = PendPredictor.GetLabelMap(predictor);  //translates 0-based index to the actual value in the Label column.
-
          // Evaluate quality of the model
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Evaluating the model...");
@@ -72,7 +68,11 @@ namespace PendAdvisorTrainer
             PendReason = "PAUT"
          };
 
+         var predictor = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+
          var prediction = predictor.Predict(input);
+
+         var labelMap = PendPredictor.GetLabelMap(predictor);  //translates 0-based index to the actual value in the Label column.
 
          Console.WriteLine("Predictions and their scores (high to low):");
          prediction.Scores.Zip(Enumerable.Range(0,int.MaxValue))
