@@ -11,10 +11,9 @@ namespace PendAdvisor.API
       {
          CreateMap<ClaimData, ModelInput>();
 
-         CreateMap<ModelOutput, AdviceData>()
-            .ForMember(ad => ad.AdvisedAction, o => o.MapFrom(mo => mo.Action));
-         //TODO: map remaining elements
-         throw new NotImplementedException("Need translation from indices to actions in mo.Scores");
+         CreateMap<ModelOutputEx, AdviceData>()
+            .ForMember(ad => ad.AdvisedAction, o => o.MapFrom(mo => mo.Action))
+            .ForMember(ad => ad.AdviceScore, o => o.MapFrom(ml => ml.ActionsAndScores[0].Score));  // ActionsAndScores is ordered by score
       }
    }
 }

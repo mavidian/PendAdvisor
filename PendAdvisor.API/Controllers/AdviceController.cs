@@ -32,14 +32,15 @@ namespace PendAdvisor.API.Controllers
       [HttpPost]
       [ProducesResponseType(StatusCodes.Status200OK)]
       [ProducesResponseType(StatusCodes.Status400BadRequest)]
-      public Task<IActionResult> ObtainPendAdvice([FromBody] ClaimData claim)
+      public IActionResult ObtainPendAdvice([FromBody] ClaimData claim)
       {
+         if (!ModelState.IsValid) return BadRequest();
          //For simplicity, the entire client logic is implemented inside the controller
-
          var modelInput = _mapper.Map<ModelInput>(claim);
-
-         throw new NotImplementedException();
-
+         var modelOutput = PendPredictor.PredictEx(modelInput);
+         var adviceData = _mapper.Map<AdviceData>(modelOutput);
+         adviceData.ClaimID = claim.ClaimID;
+         return Ok(adviceData);
       }
    }
 }
