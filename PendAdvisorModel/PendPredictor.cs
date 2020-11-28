@@ -24,12 +24,6 @@ namespace PendAdvisorModel
       }
 
 
-      /// <summary>
-      /// Cross-reference between a 0-based index to the array with Label values and the actual value in the Label column.
-      /// (does not get assigned until prediction engine is created, e.g. by calling Predict method).
-      /// </summary>
-      public static Dictionary<int, string> LabelMap { get; private set; }
-
       public static ModelOutputEx PredictEx(ModelInput input)
       {
          var modelEx = (ModelOutputEx)Predict(input);
@@ -51,17 +45,16 @@ namespace PendAdvisorModel
          MLContext mlContext = new MLContext();
          ITransformer mlModel = mlContext.Model.Load(PathToModelLocation, out _);
          var predictor = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
-         LabelMap = GetLabelMap(predictor);  //translates 0-based index to the actual value in the Label column.
          return predictor;
       }
 
 
       /// <summary>
-      /// Calculate cross-reference between a 0-based index to the array with Label values and the actual value in the Label column.
+      /// Calculate cross-reference between a 0-based index (to the array with Label values) and the actual value in the Label column.
       /// </summary>
       /// <param name="predictor">Predicting engine (has the index to prediction mapping defined during MapValueToKey conversion).</param>
       /// <returns></returns>
-      private static Dictionary<int, string> GetLabelMap(PredictionEngine<ModelInput, ModelOutput> predictor)
+      public static Dictionary<int, string> GetLabelMap(PredictionEngine<ModelInput, ModelOutput> predictor)
       {  //inspired by https://blog.hompus.nl/2020/09/14/get-all-prediction-scores-from-your-ml-net-model/
          var labelBuffer = new VBuffer<ReadOnlyMemory<char>>();
          predictor.OutputSchema["Score"].Annotations.GetValue("SlotNames", ref labelBuffer);
