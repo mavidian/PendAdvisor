@@ -12,18 +12,20 @@ namespace PendAdvisorModel.Tests
          //arrange
          var sampleInput = new ModelInput()
          {
-            ProcCd = 8534,
-            Dx = "73312",
-            Pos = "11",
-            Reas = "PDUP",
-            TotChg = 100,
+            Diagnosis1 = "E10",
+            Diagnosis2 = "I11",
+            POS = "21",
+            ProcedureCode = "34907",
+            Units = 1,
+            Price = 100f,
+            PendReason = "PAUT"
          };
 
          //act
          var predictedOutput = PendPredictor.Predict(sampleInput);
 
          //assert
-         predictedOutput.Action.Should().BeOneOf("RePend", "Release", "Deny", "MedRev");
+         predictedOutput.Action.Should().BeOneOf("RePend", "Release", "Deny", "MedReview");
          predictedOutput.Scores.Count().Should().Be(4);
          predictedOutput.Scores.ToList().ForEach(s => s.Should().BeGreaterThan(0f).And.BeLessThan(1f));
       }

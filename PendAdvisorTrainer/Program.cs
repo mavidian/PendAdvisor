@@ -14,7 +14,7 @@ namespace PendAdvisorTrainer
    public class Program
    {
       private static readonly char sep = Path.DirectorySeparatorChar;
-      private static readonly string _dataPath = $"..{sep}..{sep}..{sep}Data{sep}MockClaims.csv";
+      private static readonly string _dataPath = $"..{sep}..{sep}..{sep}Data{sep}TestClaims.csv";
       private static readonly bool _skipCrossValidation = true;
 
       private static MLContext _mlContext = new MLContext(seed: 1);
@@ -63,10 +63,13 @@ namespace PendAdvisorTrainer
 
          var input = new ModelInput
          {
-            ProcCd = 214f,
-            Pos = "11",
-            Reas = "PAUT",
-            TotChg = 100f
+            Diagnosis1 = "E10",
+            Diagnosis2 = "I11",
+            POS = "21",
+            ProcedureCode = "34907",
+            Units = 1,
+            Price = 100f,
+            PendReason = "PAUT"
          };
 
          var prediction = predictor.Predict(input);
@@ -107,9 +110,12 @@ namespace PendAdvisorTrainer
          //var trainer = _mlContext.MulticlassClassification.Trainers.OneVersusAll(binaryTrainer);
          var trainer = _mlContext.MulticlassClassification.Trainers.SdcaMaximumEntropy();
          var pipeline = _mlContext.Transforms.Conversion.MapValueToKey(outputColumnName: "Label", inputColumnName: "StringLabel")
-             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PosEncoded", inputColumnName: "Pos"))
-             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "ReasEncoded", inputColumnName: "Reas"))
-             .Append(_mlContext.Transforms.Concatenate("Features", "ProcCd", "PosEncoded", "ReasEncoded", "TotChg"))
+             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "Diagnosis1Encoded", inputColumnName: "Diagnosis1"))
+             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "Diagnosis2Encoded", inputColumnName: "Diagnosis2"))
+             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PosEncoded", inputColumnName: "POS"))
+             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "ProcedureCodeEncoded", inputColumnName: "ProcedureCode"))
+             .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PendReasonEncoded", inputColumnName: "PendReason"))
+             .Append(_mlContext.Transforms.Concatenate("Features", "Diagnosis1Encoded", "Diagnosis2Encoded", "PosEncoded", "ProcedureCodeEncoded", "Units", "Price", "PendReasonEncoded"))
              .AppendCacheCheckpoint(_mlContext) //improve performance, but only for small/medium size data
              .Append(trainer)
              .Append(_mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel"));

@@ -8,37 +8,37 @@ namespace PendAdvisorModel
       // ColumnName is the name of the column in the ML model (in absense of it, ColumnName = name of the property).
 
       [LoadColumn(0)]
-      public string ClmId { get; set; }
+      public string MemberID { get; set; }
 
       [LoadColumn(1)]
-      public string Mbr { get; set; }
+      public string ClaimID { get; set; }
 
       [LoadColumn(2)]
-      public float Npi { get; set; }
+      public string DateReceived { get; set; }
 
       [LoadColumn(3)]
-      public string State { get; set; }
+      public int providerNPI { get; set; }
 
       [LoadColumn(4)]
-      public float Zip { get; set; }
+      public string Diagnosis1 { get; set; }
 
       [LoadColumn(5)]
-      public string Date { get; set; }
+      public string Diagnosis2 { get; set; }
 
       [LoadColumn(6)]
-      public float ProcCd { get; set; }
+      public string POS { get; set; }
 
       [LoadColumn(7)]
-      public string Dx { get; set; }
+      public string ProcedureCode { get; set; }
 
       [LoadColumn(8)]
-      public string Pos { get; set; }
+      public float Units { get; set; }
 
       [LoadColumn(9)]
-      public string Reas { get; set; }
+      public float Price { get; set; }
 
       [LoadColumn(10)]
-      public float TotChg { get; set; }
+      public string PendReason { get; set; }
 
       [LoadColumn(11), ColumnName("StringLabel")]
       public string Action { get; set; }
