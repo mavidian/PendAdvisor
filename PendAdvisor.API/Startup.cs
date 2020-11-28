@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,10 @@ namespace PendAdvisor.API
       public void ConfigureServices(IServiceCollection services)
       {
          services.AddControllers();
+
+         services.AddSwaggerGen(); //by deafult, it generates v1 for the controllers, i.e. /swagger/v1/swagger.json
+
+         services.AddAutoMapper(typeof(MappingProfile));
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +39,13 @@ namespace PendAdvisor.API
          {
             app.UseDeveloperExceptionPage();
          }
+
+         app.UseSwagger();
+         app.UseSwaggerUI(o =>
+         {
+            o.SwaggerEndpoint("/swagger/v1/swagger.json", "PendAdvisor API v1");
+            o.RoutePrefix = string.Empty;
+         } );
 
          app.UseRouting();
 
