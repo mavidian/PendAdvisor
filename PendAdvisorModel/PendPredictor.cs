@@ -1,7 +1,9 @@
 ﻿using Microsoft.ML;
+using Microsoft.ML.Data;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace PendAdvisorModel
@@ -22,13 +24,48 @@ namespace PendAdvisorModel
       }
 
 
+      public static ModelOutputEx PredictEx(ModelInput input)
+      {
+         var model = Predict(input);
+
+         var modelEx = new ModelOutputEx();
+         modelEx.Action = model.Action;
+         modelEx.Scores = model.Scores;
+
+         // ActionsAndScores is a set of tuples (Action and Score) sorted by Score (highest first).
+         modelEx.ActionsAndScores =
+            modelEx.Scores.Zip(Enumerable.Range(0, int.MaxValue), (f, s) => (First: f, Second: s))  // First = Score, Second = index
+                        .OrderByDescending(t => t.First)
+                        .Select(t => (Action: GetLabelMap(PredictionEngine.Value)[t.Second], Score: t.First))
+                        .ToArray();
+         return modelEx;
+      }
+
+
       private static Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictionEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(CreatePredictionEngine);
 
       private static PredictionEngine<ModelInput, ModelOutput> CreatePredictionEngine()
       {
          MLContext mlContext = new MLContext();
          ITransformer mlModel = mlContext.Model.Load(PathToModelLocation, out _);
-         return mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+         var predictor = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+         return predictor;
+      }
+
+
+      /// <summary>
+      /// Calculate cross-reference between a 0-based index (to the array with Label values) and the actual value in the Label column.
+      /// </summary>
+      /// <param name="predictor">Predicting engine (has the index to prediction mapping defined during MapValueToKey conversion).</param>
+      /// <returns></returns>
+      public static Dictionary<int, string> GetLabelMap(PredictionEngine<ModelInput, ModelOutput> predictor)
+      {  //inspired by https://blog.hompus.nl/2020/09/14/get-all-prediction-scores-from-your-ml-net-model/
+         var labelBuffer = new VBuffer<ReadOnlyMemory<char>>();
+         predictor.OutputSchema["Score"].Annotations.GetValue("SlotNames", ref labelBuffer);
+         var labels = labelBuffer.DenseValues().Select(l => l.ToString());
+
+         int i = 0;
+         return labels.ToDictionary(_ => i++, l => l);
       }
 
    }

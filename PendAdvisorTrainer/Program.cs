@@ -37,10 +37,6 @@ namespace PendAdvisorTrainer
          Console.WriteLine($"Training algorithm used: {algorithmDesc}");
          ITransformer mlModel = TrainModel(trainingPipeline, trainData);
 
-         //..model trained, create predicting engine early as it's needed to get the labelMap
-         var predictor = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
-         var labelMap = GetLabelMap(predictor);  //translates 0-based index to the actual value in the Label column.
-
          // Evaluate quality of the model
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Evaluating the model...");
@@ -72,7 +68,11 @@ namespace PendAdvisorTrainer
             PendReason = "PAUT"
          };
 
+         var predictor = _mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
+
          var prediction = predictor.Predict(input);
+
+         var labelMap = PendPredictor.GetLabelMap(predictor);  //translates 0-based index to the actual value in the Label column.
 
          Console.WriteLine("Predictions and their scores (high to low):");
          prediction.Scores.Zip(Enumerable.Range(0,int.MaxValue))
@@ -174,20 +174,5 @@ namespace PendAdvisorTrainer
          _mlContext.Model.Save(mlModel, modelInputSchema, modelPath);
       }
 
-
-      /// <summary>
-      /// Return a cross-reference between a 0-based index to the actual value in the Label column.
-      /// </summary>
-      /// <param name="predictor">Predicting engine (has the index to prediction mapping defined during MapValueToKey conversion).</param>
-      /// <returns></returns>
-      private static Dictionary<int, string> GetLabelMap(PredictionEngine<ModelInput, ModelOutput> predictor)
-      {  //inspired by https://blog.hompus.nl/2020/09/14/get-all-prediction-scores-from-your-ml-net-model/
-         var labelBuffer = new VBuffer<ReadOnlyMemory<char>>();
-         predictor.OutputSchema["Score"].Annotations.GetValue("SlotNames", ref labelBuffer);
-         var labels = labelBuffer.DenseValues().Select(l => l.ToString());
-
-         int i = 0;
-         return labels.ToDictionary(_ => i++, l => l);
-      }
    }
 }
