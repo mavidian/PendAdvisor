@@ -26,7 +26,11 @@ namespace PendAdvisorModel
 
       public static ModelOutputEx PredictEx(ModelInput input)
       {
-         var modelEx = (ModelOutputEx)Predict(input);
+         var model = Predict(input);
+
+         var modelEx = new ModelOutputEx();
+         modelEx.Action = model.Action;
+         modelEx.Scores = model.Scores;
 
          // ActionsAndScores is a set of tuples (Action and Score) sorted by Score (highest first).
          modelEx.ActionsAndScores =
