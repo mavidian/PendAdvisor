@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using PendAdvisor.API.DTOs;
 using PendAdvisorModel;
 using Swashbuckle.AspNetCore.Annotations;
-using System;
-using System.Threading.Tasks;
 
 namespace PendAdvisor.API.Controllers
 {
