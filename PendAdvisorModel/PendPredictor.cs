@@ -10,13 +10,14 @@ namespace PendAdvisorModel
 {
    public static class PendPredictor
    {
-      // The model (MLModel.zip file) needs to reside in an arbitrary location accessible from multiple projects.
-      // Here, we're placing it in a subfolder of this source file at the compile time.
-      //TODO: refactor for truly arbitrary location.
+      // The model (MLModel.zip file) is needed during both training (PendAdvisorTrainer project) and consuming the model (PendAdvisor.API project).
+      // Because the ML model can be consumed in many scenarios (such as Docker), the MLModel.zip file is loaded from the location of current executable,
+      // such as PendAdvisor.API.exe. MLModel.zip is copied to this location during the build (Copy if newer) of the API project.
+      // Therefore, PendAdvisor.API project MUST BE REBUILT every time a new ML model is trained (or the old ML model will be in effect)
       private static char sep = Path.DirectorySeparatorChar;
-      public static string PathToModelLocation { get; } = Path.GetDirectoryName(SourcePathAtCompile()) + $"{sep}MlModel{sep}MLModel.zip";
-
-      private static string SourcePathAtCompile([CallerFilePath] string thisFilePath = null) { return thisFilePath; }
+      private static string _pathToLoadModel = $"{AppContext.BaseDirectory}MlModel{sep}MLModel.zip"; //used by the ML model consumer, e.g. the API
+      public static string PathToSaveModel = Path.GetFullPath(Path.GetDirectoryName(SourcePathAtCompile()) + $"{sep}..{sep}PendAdvisor.API{sep}MlModel{sep}MLModel.zip");  // used by the ML model trainer
+      private static string SourcePathAtCompile([CallerFilePath] string thisFilePath = null) { return thisFilePath; }  // a subfolder of this source file at the compile time.
 
       public static ModelOutput Predict(ModelInput input)
       {
@@ -47,7 +48,7 @@ namespace PendAdvisorModel
       private static PredictionEngine<ModelInput, ModelOutput> CreatePredictionEngine()
       {
          MLContext mlContext = new MLContext();
-         ITransformer mlModel = mlContext.Model.Load(PathToModelLocation, out _);
+         ITransformer mlModel = mlContext.Model.Load(_pathToLoadModel, out _);
          var predictor = mlContext.Model.CreatePredictionEngine<ModelInput, ModelOutput>(mlModel);
          return predictor;
       }

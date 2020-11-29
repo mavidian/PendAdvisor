@@ -84,8 +84,9 @@ namespace PendAdvisorTrainer
 
          // Save the trained model to a .ZIP file
          Console.WriteLine();
-         Console.WriteLine($"{DateTime.Now} Saving the trained model into {PendPredictor.PathToModelLocation} file...");
-         SaveModel(mlModel, allData.Schema, PendPredictor.PathToModelLocation);
+         Console.WriteLine($"{DateTime.Now} Saving the trained model into {PendPredictor.PathToSaveModel} file...");
+         SaveModel(mlModel, allData.Schema, PendPredictor.PathToSaveModel);
+         Console.WriteLine("Rebuild the API project in order for the new model to be in effect!");
 
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} ALL DONE!");
