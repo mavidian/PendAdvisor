@@ -17,7 +17,7 @@ namespace PendAdvisorModel
       public string DateReceived { get; set; }
 
       [LoadColumn(3)]
-      public int providerNPI { get; set; }
+      public string providerNPI { get; set; }
 
       [LoadColumn(4)]
       public string Diagnosis1 { get; set; }

@@ -117,7 +117,7 @@ namespace PendAdvisorTrainer
              .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "ProcedureCodeEncoded", inputColumnName: "ProcedureCode"))
              .Append(_mlContext.Transforms.Categorical.OneHotEncoding(outputColumnName: "PendReasonEncoded", inputColumnName: "PendReason"))
              .Append(_mlContext.Transforms.Concatenate("Features", "Diagnosis1Encoded", "Diagnosis2Encoded", "PosEncoded", "ProcedureCodeEncoded", "Units", "Price", "PendReasonEncoded"))
-             .AppendCacheCheckpoint(_mlContext) //improve performance, but only for small/medium size data
+             .AppendCacheCheckpoint(_mlContext) //improve performance at the cost of memory use (good only for small/medium size data)
              .Append(trainer)
              .Append(_mlContext.Transforms.Conversion.MapKeyToValue(outputColumnName: "PredictedLabel"));
 

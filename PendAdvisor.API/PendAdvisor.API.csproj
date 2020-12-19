@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="MlModel\MLModel.zip" />
+    <None Remove="MLModel\MLModel.zip" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="MlModel\MLModel.zip">
+    <Content Include="MLModel\MLModel.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
