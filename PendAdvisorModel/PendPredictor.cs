@@ -13,11 +13,16 @@ namespace PendAdvisorModel
       // The model (MLModel.zip file) is needed during both training (PendAdvisorTrainer project) and consuming the model (PendAdvisor.API project).
       // Because the ML model can be consumed in many scenarios (such as Docker), the MLModel.zip file is loaded from the location of current executable,
       // such as PendAdvisor.API.exe. MLModel.zip is copied to that location (from MLModel subfolder) during the build (Copy if newer) of the PendAdvisor.API project.
-      // Note that created (and posted to the MLModel subfolder of the PendAdvisor.API project) when PendAdvisorTrainer application is executed. 
+      // Note that MLModel.zip is created (and posted to the MLModel subfolder of the PendAdvisor.API project) when PendAdvisorTrainer application is executed. 
       // Therefore, PendAdvisor.API project MUST BE REBUILT every time a new ML model is trained, i.e. after running PendAdvisorTrainer.exe (or the old ML model will remain in effect).
       private static char sep = Path.DirectorySeparatorChar;
       private static string _pathToLoadModel = $"{AppContext.BaseDirectory}MLModel{sep}MLModel.zip"; //used by the ML model consumer, e.g. the API
-      public static string PathToSaveModel = Path.GetFullPath(Path.GetDirectoryName(SourcePathAtCompile()) + $"{sep}..{sep}PendAdvisor.API{sep}MLModel{sep}MLModel.zip");  // used by the ML model trainer
+      public static string PathToSaveModel = Path.GetFullPath(Path.GetDirectoryName(SourcePathAtCompile()) + $"{sep}..{sep}PendAdvisor.API{sep}MLModel{sep}MLModel.zip");
+      public static string PathToSaveModel2 = Path.GetFullPath(Path.GetDirectoryName(SourcePathAtCompile()) + $"{sep}..{sep}PendAdvisorTester{sep}MLModel{sep}MLModel.zip");
+      // 12/29/2020: additional consumer of this PendPredictor class has been added - PendAdvisorTester project, which necessitates the MLModel.zip to also be available in a subfolder
+      // of the PendAdvisorTester.exe (like described above for the PendAdvisor.API).
+      // TODO: read the MLModel.zip file from a single location instead of a subfolder of current executable.
+
       private static string SourcePathAtCompile([CallerFilePath] string thisFilePath = null) { return thisFilePath; }  // a subfolder of this source file at the compile time.
 
 

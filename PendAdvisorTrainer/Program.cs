@@ -86,7 +86,9 @@ namespace PendAdvisorTrainer
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} Saving the trained model into {PendPredictor.PathToSaveModel} file...");
          SaveModel(mlModel, allData.Schema, PendPredictor.PathToSaveModel);
-         Console.WriteLine("Rebuild the API project in order for the new model to be in effect!");
+         Console.WriteLine($"{DateTime.Now} Saving the trained model into {PendPredictor.PathToSaveModel2} file...");
+         SaveModel(mlModel, allData.Schema, PendPredictor.PathToSaveModel2);
+         Console.WriteLine("Rebuild the API and Tester projects in order for the new model to be in effect!");
 
          Console.WriteLine();
          Console.WriteLine($"{DateTime.Now} ALL DONE!");
