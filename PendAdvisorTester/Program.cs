@@ -75,7 +75,7 @@ namespace PendAdvisorTester
 
       private static string GetScoreForAction(ModelOutputEx modelOutput, string predictedAction)
       {
-         return modelOutput.ActionsAndScores.First(t => t.Action == predictedAction).Score.ToString("n1"); // 1 decimal place
+         return modelOutput.ActionsAndScores.First(t => t.Action == predictedAction).Score.ToString("p1");
       }
    }
 }
