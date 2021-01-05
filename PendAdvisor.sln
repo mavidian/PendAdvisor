@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PendAdvisorModel.Tests", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PendAdvisor.API", "PendAdvisor.API\PendAdvisor.API.csproj", "{2561308F-F2F0-47B4-B6C8-853513C5E425}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PendAdvisorTester", "PendAdvisorTester\PendAdvisorTester.csproj", "{58FE8E88-5F5B-498B-9DC9-C354733ED28B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PendAdvisorTester", "PendAdvisorTester\PendAdvisorTester.csproj", "{58FE8E88-5F5B-498B-9DC9-C354733ED28B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PendAdvisorClient", "PendAdvisorClient\PendAdvisorClient.csproj", "{67FA0CF2-E679-4452-9A2B-EBCB3027B915}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{58FE8E88-5F5B-498B-9DC9-C354733ED28B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58FE8E88-5F5B-498B-9DC9-C354733ED28B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58FE8E88-5F5B-498B-9DC9-C354733ED28B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67FA0CF2-E679-4452-9A2B-EBCB3027B915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67FA0CF2-E679-4452-9A2B-EBCB3027B915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67FA0CF2-E679-4452-9A2B-EBCB3027B915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67FA0CF2-E679-4452-9A2B-EBCB3027B915}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

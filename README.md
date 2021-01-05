@@ -37,8 +37,8 @@ Model output provides a recommended action for the claim, which can one of:
 
 More specifically, the output contains an array where each of the 4 possible actions is
 associated with a score, which is a value between 0 and 1. The recommended (predicted)
-action is the one with the highest score. The higher score value the higher likelihood
-that the prediction is correct. The total of all score values is always 1.
+action is the one with the highest score. The higher score value, the better odds that
+the prediction is correct. The total of all score values is always 1.
 
 ## Projecs Descriptions
 
@@ -52,6 +52,8 @@ set of synthetic claim data.
 containing the ML model inputs and returns htttp responses containing corresponding ML model outputs.
 5. **PendAdvisorTester**. A console application that consumes an arbitrary set of test claims and
 provides a set of corresponding predictions.
+6. **PendAdvisorClient**. A desktop application (WinForms) and an http client that consumes REST API
+(like the one exposed by PendAdvisor.API) to obtain recommended actions for pended medical claims.
 
 Note that PendAdvisor.API and PendAdvisorTester projects directly depend on the prediction engine
 implemented in PendAdvisorModel project. The engine runtime requires access to the
