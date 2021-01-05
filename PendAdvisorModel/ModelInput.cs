@@ -5,7 +5,7 @@ namespace PendAdvisorModel
    public class ModelInput
    {
       // LoadColumn is the 0-based index of the column in input data.
-      // ColumnName is the name of the column in the ML model (in absense of it, ColumnName = name of the property).
+      // ColumnName is the name of the column in the ML model (in absence of it, ColumnName = name of the property).
 
       [LoadColumn(0)]
       public string MemberID { get; set; }
