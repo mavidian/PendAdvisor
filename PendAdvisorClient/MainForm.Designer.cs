@@ -42,14 +42,17 @@ namespace PendAdvisorClient
          this.btnClose = new System.Windows.Forms.Button();
          this.picCaduceus = new System.Windows.Forms.PictureBox();
          this.pnlMain = new System.Windows.Forms.Panel();
+         this.lblRecommendation = new System.Windows.Forms.Label();
+         this.txtThreshold = new System.Windows.Forms.TextBox();
+         this.lblThreshold = new System.Windows.Forms.Label();
+         this.chartAdviceScores = new System.Windows.Forms.DataVisualization.Charting.Chart();
          this.pnlTitle = new System.Windows.Forms.Panel();
          this.lblTitle = new System.Windows.Forms.Label();
-         this.chartAdviceScores = new System.Windows.Forms.DataVisualization.Charting.Chart();
          this.pnlNavigation.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.picCaduceus)).BeginInit();
          this.pnlMain.SuspendLayout();
-         this.pnlTitle.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.chartAdviceScores)).BeginInit();
+         this.pnlTitle.SuspendLayout();
          this.SuspendLayout();
          // 
          // pnlNavigation
@@ -147,6 +150,9 @@ namespace PendAdvisorClient
          // pnlMain
          // 
          this.pnlMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(216)))), ((int)(((byte)(213)))));
+         this.pnlMain.Controls.Add(this.lblRecommendation);
+         this.pnlMain.Controls.Add(this.txtThreshold);
+         this.pnlMain.Controls.Add(this.lblThreshold);
          this.pnlMain.Controls.Add(this.chartAdviceScores);
          this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
          this.pnlMain.Location = new System.Drawing.Point(133, 0);
@@ -154,28 +160,38 @@ namespace PendAdvisorClient
          this.pnlMain.Size = new System.Drawing.Size(667, 464);
          this.pnlMain.TabIndex = 1;
          // 
-         // pnlTitle
+         // lblRecommendation
          // 
-         this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(136)))), ((int)(((byte)(130)))));
-         this.pnlTitle.Controls.Add(this.lblTitle);
-         this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
-         this.pnlTitle.Location = new System.Drawing.Point(133, 0);
-         this.pnlTitle.Name = "pnlTitle";
-         this.pnlTitle.Size = new System.Drawing.Size(667, 70);
-         this.pnlTitle.TabIndex = 2;
+         this.lblRecommendation.AutoSize = true;
+         this.lblRecommendation.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblRecommendation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         this.lblRecommendation.Location = new System.Drawing.Point(328, 387);
+         this.lblRecommendation.MaximumSize = new System.Drawing.Size(330, 0);
+         this.lblRecommendation.Name = "lblRecommendation";
+         this.lblRecommendation.Size = new System.Drawing.Size(327, 66);
+         this.lblRecommendation.TabIndex = 3;
+         this.lblRecommendation.Text = "Recommended action is ... with ...% confidence.";
          // 
-         // lblTitle
+         // txtThreshold
          // 
-         this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.lblTitle.Font = new System.Drawing.Font("Segoe Print", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblTitle.ForeColor = System.Drawing.Color.White;
-         this.lblTitle.Location = new System.Drawing.Point(0, 0);
-         this.lblTitle.Name = "lblTitle";
-         this.lblTitle.Size = new System.Drawing.Size(667, 70);
-         this.lblTitle.TabIndex = 0;
-         this.lblTitle.Text = "PendAdvisor Client";
-         this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-         this.lblTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblTitle_MouseDown);
+         this.txtThreshold.BorderStyle = System.Windows.Forms.BorderStyle.None;
+         this.txtThreshold.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.txtThreshold.Location = new System.Drawing.Point(607, 95);
+         this.txtThreshold.Name = "txtThreshold";
+         this.txtThreshold.Size = new System.Drawing.Size(33, 17);
+         this.txtThreshold.TabIndex = 2;
+         this.txtThreshold.TextChanged += new System.EventHandler(this.txtThreshold_TextChanged);
+         // 
+         // lblThreshold
+         // 
+         this.lblThreshold.AutoSize = true;
+         this.lblThreshold.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblThreshold.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         this.lblThreshold.Location = new System.Drawing.Point(527, 91);
+         this.lblThreshold.Name = "lblThreshold";
+         this.lblThreshold.Size = new System.Drawing.Size(74, 23);
+         this.lblThreshold.TabIndex = 1;
+         this.lblThreshold.Text = "Threshold";
          // 
          // chartAdviceScores
          // 
@@ -199,8 +215,8 @@ namespace PendAdvisorClient
          chartArea1.AxisY.Maximum = 100D;
          chartArea1.AxisY.Minimum = 0D;
          chartArea1.AxisY.MinorGrid.Enabled = true;
-         chartArea1.AxisY.MinorGrid.Interval = 90D;
-         chartArea1.AxisY.MinorGrid.IntervalOffset = double.NaN;
+         chartArea1.AxisY.MinorGrid.Interval = 100D;
+         chartArea1.AxisY.MinorGrid.IntervalOffset = 50D;
          chartArea1.AxisY.MinorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
          chartArea1.AxisY.MinorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
          chartArea1.AxisY.MinorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
@@ -210,7 +226,7 @@ namespace PendAdvisorClient
          chartArea1.BackColor = System.Drawing.Color.Transparent;
          chartArea1.Name = "ChartArea1";
          this.chartAdviceScores.ChartAreas.Add(chartArea1);
-         this.chartAdviceScores.Location = new System.Drawing.Point(287, 126);
+         this.chartAdviceScores.Location = new System.Drawing.Point(296, 118);
          this.chartAdviceScores.Name = "chartAdviceScores";
          series1.ChartArea = "ChartArea1";
          series1.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -245,9 +261,32 @@ namespace PendAdvisorClient
          series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
          series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
          this.chartAdviceScores.Series.Add(series1);
-         this.chartAdviceScores.Size = new System.Drawing.Size(368, 256);
+         this.chartAdviceScores.Size = new System.Drawing.Size(368, 266);
          this.chartAdviceScores.TabIndex = 0;
          this.chartAdviceScores.Text = "chart1";
+         // 
+         // pnlTitle
+         // 
+         this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(136)))), ((int)(((byte)(130)))));
+         this.pnlTitle.Controls.Add(this.lblTitle);
+         this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
+         this.pnlTitle.Location = new System.Drawing.Point(133, 0);
+         this.pnlTitle.Name = "pnlTitle";
+         this.pnlTitle.Size = new System.Drawing.Size(667, 70);
+         this.pnlTitle.TabIndex = 2;
+         // 
+         // lblTitle
+         // 
+         this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+         this.lblTitle.Font = new System.Drawing.Font("Segoe Print", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblTitle.ForeColor = System.Drawing.Color.White;
+         this.lblTitle.Location = new System.Drawing.Point(0, 0);
+         this.lblTitle.Name = "lblTitle";
+         this.lblTitle.Size = new System.Drawing.Size(667, 70);
+         this.lblTitle.TabIndex = 0;
+         this.lblTitle.Text = "PendAdvisor Client";
+         this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+         this.lblTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblTitle_MouseDown);
          // 
          // MainForm
          // 
@@ -265,8 +304,9 @@ namespace PendAdvisorClient
          this.pnlNavigation.ResumeLayout(false);
          ((System.ComponentModel.ISupportInitialize)(this.picCaduceus)).EndInit();
          this.pnlMain.ResumeLayout(false);
-         this.pnlTitle.ResumeLayout(false);
+         this.pnlMain.PerformLayout();
          ((System.ComponentModel.ISupportInitialize)(this.chartAdviceScores)).EndInit();
+         this.pnlTitle.ResumeLayout(false);
          this.ResumeLayout(false);
 
       }
@@ -283,6 +323,9 @@ namespace PendAdvisorClient
       private System.Windows.Forms.Button btnApply;
       private System.Windows.Forms.Button btnClaim;
       private System.Windows.Forms.DataVisualization.Charting.Chart chartAdviceScores;
+      private System.Windows.Forms.Label lblThreshold;
+      private System.Windows.Forms.TextBox txtThreshold;
+      private System.Windows.Forms.Label lblRecommendation;
    }
 }
 

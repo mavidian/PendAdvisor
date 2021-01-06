@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PendAdvisorClient
@@ -24,8 +20,42 @@ namespace PendAdvisorClient
       public MainForm()
       {
          InitializeComponent();
+
+         txtThreshold.Text = "90";
+         ////Scores = new double[] { 96D, 2D, 1D, 1D};
+         Scores = null;
       }
 
+
+      /// <summary>
+      /// Write only property containing 4 score values for Release, Deny, Reprocess & MedReview respectively.
+      /// Setting this property populated the grid.
+      /// Can be set to null, whcih means reset.
+      /// </summary>
+      private double[] Scores
+      {
+         set
+         {
+            // 0-Release, 1-Deny, 2-Reprocess, 3-MedReview
+            double[] valuesToAssign;
+            Debug.Assert(value == null || value.Count() == 4);
+            Debug.Assert(value == null || value.Sum() - 100D < .001);
+            if (value == null)
+            {
+               valuesToAssign = new double[] { 0D, 0D, 0D, 0D };
+               chartAdviceScores.Series[0].Points[0].SetValueY(0D);
+               lblRecommendation.Text = string.Empty;
+            }
+            else
+            {
+               valuesToAssign = value;
+               var topIndex = valuesToAssign.ToList().IndexOf(valuesToAssign.Max());
+               lblRecommendation.Text = $"Recommended action is {new List<string>{ "Release", "Deny", "Reprocess", "MedReview" }[topIndex]} with {valuesToAssign[topIndex]:#0.0}% confidence.";
+            }
+            var pointsToSet = chartAdviceScores.Series[0].Points;
+            for (var i = 0; i < 4; i++) pointsToSet[i].SetValueY(valuesToAssign[i]);
+         }
+      }
 
       private void lblTitle_MouseDown(object sender, MouseEventArgs e)
       {
@@ -42,6 +72,14 @@ namespace PendAdvisorClient
       private void btnAdvice_Click(object sender, EventArgs e)
       {
          btnClose.Enabled = !btnClose.Enabled;
+      }
+
+      private void txtThreshold_TextChanged(object sender, EventArgs e)
+      {
+         if (double.TryParse((txtThreshold.Text), out var threshold))
+         {
+            this.chartAdviceScores.ChartAreas[0].AxisY.MinorGrid.IntervalOffset = threshold;
+         }
       }
 
    }
