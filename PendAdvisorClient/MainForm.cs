@@ -66,7 +66,7 @@ namespace PendAdvisorClient
 
       /// <summary>
       /// Expose form controls holding claim data as model input (to be serialized as JSON).
-      /// Get retries model input from the form; set populates for with model input data.
+      /// Get retries model input from the form; set populates for with model input data (null to reset contents).
       /// </summary>
       private ModelInput ClaimData
       {
@@ -89,17 +89,17 @@ namespace PendAdvisorClient
          }
          set
          {
-            txtMemberID.Text = value.MemberID;
-            txtClaimID.Text = value.ClaimID;
-            txtDateReceived.Text = value.DateReceived;
-            txtProviderNPI.Text = value.providerNPI;
-            txtDiagnosis1.Text = value.Diagnosis1;
-            txtDiagnosis2.Text = value.Diagnosis2;
-            txtPOS.Text = value.POS;
-            txtProcedureCode.Text = value.ProcedureCode;
-            txtUnits.Text = value.Units.ToString();
-            txtPrice.Text = value.Price.ToString();
-            txtPendReason.Text = value.PendReason;
+            txtMemberID.Text = value?.MemberID;
+            txtClaimID.Text = value?.ClaimID;
+            txtDateReceived.Text = value?.DateReceived;
+            txtProviderNPI.Text = value?.providerNPI;
+            txtDiagnosis1.Text = value?.Diagnosis1;
+            txtDiagnosis2.Text = value?.Diagnosis2;
+            txtPOS.Text = value?.POS;
+            txtProcedureCode.Text = value?.ProcedureCode;
+            txtUnits.Text = value?.Units.ToString();
+            txtPrice.Text = value?.Price.ToString();
+            txtPendReason.Text = value?.PendReason;
          }
       }
 
@@ -119,7 +119,8 @@ namespace PendAdvisorClient
 
       private void btnAdvice_Click(object sender, EventArgs e)
       {
-         btnClose.Enabled = !btnClose.Enabled;
+         throw new NotImplementedException();
+         ////btnClose.Enabled = !btnClose.Enabled;
       }
 
       private void txtThreshold_TextChanged(object sender, EventArgs e)
@@ -163,6 +164,16 @@ namespace PendAdvisorClient
             jsonClaimData = e.Data.GetData(DataFormats.Text).ToString();
 
          ClaimData = JsonConvert.DeserializeObject<ModelInput>(jsonClaimData);
+      }
+
+      private void btnClaim_Click(object sender, EventArgs e)
+      {
+         ClaimData = null;
+      }
+
+      private void btnApply_Click(object sender, EventArgs e)
+      {
+         throw new NotImplementedException();
       }
    }
 }
