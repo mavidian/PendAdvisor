@@ -29,12 +29,12 @@ namespace PendAdvisorClient
       /// </summary>
       private void InitializeComponent()
       {
-         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-         System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint13 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 28D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint14 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 24D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint15 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 26D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint16 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 22D);
+         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea16 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+         System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint61 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 28D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint62 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 24D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint63 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 26D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint64 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 22D);
          this.pnlNavigation = new System.Windows.Forms.Panel();
          this.btnApply = new System.Windows.Forms.Button();
          this.btnClaim = new System.Windows.Forms.Button();
@@ -83,7 +83,7 @@ namespace PendAdvisorClient
          // 
          // pnlNavigation
          // 
-         this.pnlNavigation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(195)))), ((int)(((byte)(220)))));
+         this.pnlNavigation.BackColor = System.Drawing.Color.White;
          this.pnlNavigation.Controls.Add(this.btnApply);
          this.pnlNavigation.Controls.Add(this.btnClaim);
          this.pnlNavigation.Controls.Add(this.btnAdvice);
@@ -93,7 +93,7 @@ namespace PendAdvisorClient
          this.pnlNavigation.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.pnlNavigation.Location = new System.Drawing.Point(0, 0);
          this.pnlNavigation.Name = "pnlNavigation";
-         this.pnlNavigation.Size = new System.Drawing.Size(133, 469);
+         this.pnlNavigation.Size = new System.Drawing.Size(133, 465);
          this.pnlNavigation.TabIndex = 0;
          // 
          // btnApply
@@ -177,7 +177,7 @@ namespace PendAdvisorClient
          // 
          // pnlMain
          // 
-         this.pnlMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(216)))), ((int)(((byte)(213)))));
+         this.pnlMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(242)))), ((int)(((byte)(204)))));
          this.pnlMain.Controls.Add(this.flowpnlClaimData);
          this.pnlMain.Controls.Add(this.picMLBrain);
          this.pnlMain.Controls.Add(this.lblRecommendation);
@@ -187,7 +187,7 @@ namespace PendAdvisorClient
          this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
          this.pnlMain.Location = new System.Drawing.Point(133, 0);
          this.pnlMain.Name = "pnlMain";
-         this.pnlMain.Size = new System.Drawing.Size(644, 469);
+         this.pnlMain.Size = new System.Drawing.Size(640, 465);
          this.pnlMain.TabIndex = 1;
          // 
          // flowpnlClaimData
@@ -499,71 +499,71 @@ namespace PendAdvisorClient
          // chartAdviceScores
          // 
          this.chartAdviceScores.BackColor = System.Drawing.Color.Transparent;
-         chartArea4.AxisX.IsLabelAutoFit = false;
-         chartArea4.AxisX.IsMarginVisible = false;
-         chartArea4.AxisX.LabelStyle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea4.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea4.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea4.AxisX.MajorGrid.Enabled = false;
-         chartArea4.AxisX.ScaleBreakStyle.Enabled = true;
-         chartArea4.AxisX.Title = "Advice";
-         chartArea4.AxisX.TitleFont = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea4.AxisX.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea4.AxisY.Interval = 25D;
-         chartArea4.AxisY.IsLabelAutoFit = false;
-         chartArea4.AxisY.LabelStyle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea4.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea4.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea4.AxisY.MajorGrid.Enabled = false;
-         chartArea4.AxisY.Maximum = 100D;
-         chartArea4.AxisY.Minimum = 0D;
-         chartArea4.AxisY.MinorGrid.Enabled = true;
-         chartArea4.AxisY.MinorGrid.Interval = 100D;
-         chartArea4.AxisY.MinorGrid.IntervalOffset = 50D;
-         chartArea4.AxisY.MinorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-         chartArea4.AxisY.MinorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-         chartArea4.AxisY.MinorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea4.AxisY.Title = "Score";
-         chartArea4.AxisY.TitleFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea4.AxisY.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea4.BackColor = System.Drawing.Color.Transparent;
-         chartArea4.Name = "ChartArea1";
-         this.chartAdviceScores.ChartAreas.Add(chartArea4);
+         chartArea16.AxisX.IsLabelAutoFit = false;
+         chartArea16.AxisX.IsMarginVisible = false;
+         chartArea16.AxisX.LabelStyle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea16.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea16.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea16.AxisX.MajorGrid.Enabled = false;
+         chartArea16.AxisX.ScaleBreakStyle.Enabled = true;
+         chartArea16.AxisX.Title = "Advice";
+         chartArea16.AxisX.TitleFont = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea16.AxisX.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea16.AxisY.Interval = 25D;
+         chartArea16.AxisY.IsLabelAutoFit = false;
+         chartArea16.AxisY.LabelStyle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea16.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea16.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea16.AxisY.MajorGrid.Enabled = false;
+         chartArea16.AxisY.Maximum = 100D;
+         chartArea16.AxisY.Minimum = 0D;
+         chartArea16.AxisY.MinorGrid.Enabled = true;
+         chartArea16.AxisY.MinorGrid.Interval = 100D;
+         chartArea16.AxisY.MinorGrid.IntervalOffset = 50D;
+         chartArea16.AxisY.MinorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+         chartArea16.AxisY.MinorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+         chartArea16.AxisY.MinorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea16.AxisY.Title = "Score";
+         chartArea16.AxisY.TitleFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea16.AxisY.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea16.BackColor = System.Drawing.Color.Transparent;
+         chartArea16.Name = "ChartArea1";
+         this.chartAdviceScores.ChartAreas.Add(chartArea16);
          this.chartAdviceScores.Location = new System.Drawing.Point(248, 111);
          this.chartAdviceScores.Name = "chartAdviceScores";
-         series4.ChartArea = "ChartArea1";
-         series4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         series4.IsValueShownAsLabel = true;
-         series4.Name = "Series1";
-         dataPoint13.AxisLabel = "Release";
-         dataPoint13.Color = System.Drawing.Color.Green;
-         dataPoint13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint13.IsValueShownAsLabel = true;
-         dataPoint13.Label = "";
-         dataPoint13.LabelForeColor = System.Drawing.Color.DarkGreen;
-         dataPoint13.LabelFormat = "";
-         dataPoint14.AxisLabel = "Deny";
-         dataPoint14.Color = System.Drawing.Color.Firebrick;
-         dataPoint14.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint14.Label = "";
-         dataPoint14.LabelForeColor = System.Drawing.Color.DarkRed;
-         dataPoint15.AxisLabel = "Reprocess";
-         dataPoint15.Color = System.Drawing.Color.Orange;
-         dataPoint15.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint15.Label = "";
-         dataPoint15.LabelForeColor = System.Drawing.Color.Peru;
-         dataPoint16.AxisLabel = "MedReview";
-         dataPoint16.Color = System.Drawing.Color.RoyalBlue;
-         dataPoint16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint16.Label = "";
-         dataPoint16.LabelForeColor = System.Drawing.Color.MediumBlue;
-         series4.Points.Add(dataPoint13);
-         series4.Points.Add(dataPoint14);
-         series4.Points.Add(dataPoint15);
-         series4.Points.Add(dataPoint16);
-         series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-         series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
-         this.chartAdviceScores.Series.Add(series4);
+         series16.ChartArea = "ChartArea1";
+         series16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         series16.IsValueShownAsLabel = true;
+         series16.Name = "Series1";
+         dataPoint61.AxisLabel = "Release";
+         dataPoint61.Color = System.Drawing.Color.Green;
+         dataPoint61.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint61.IsValueShownAsLabel = true;
+         dataPoint61.Label = "";
+         dataPoint61.LabelForeColor = System.Drawing.Color.DarkGreen;
+         dataPoint61.LabelFormat = "";
+         dataPoint62.AxisLabel = "Deny";
+         dataPoint62.Color = System.Drawing.Color.Firebrick;
+         dataPoint62.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint62.Label = "";
+         dataPoint62.LabelForeColor = System.Drawing.Color.DarkRed;
+         dataPoint63.AxisLabel = "Reprocess";
+         dataPoint63.Color = System.Drawing.Color.Orange;
+         dataPoint63.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint63.Label = "";
+         dataPoint63.LabelForeColor = System.Drawing.Color.Peru;
+         dataPoint64.AxisLabel = "MedReview";
+         dataPoint64.Color = System.Drawing.Color.RoyalBlue;
+         dataPoint64.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint64.Label = "";
+         dataPoint64.LabelForeColor = System.Drawing.Color.MediumBlue;
+         series16.Points.Add(dataPoint61);
+         series16.Points.Add(dataPoint62);
+         series16.Points.Add(dataPoint63);
+         series16.Points.Add(dataPoint64);
+         series16.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+         series16.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
+         this.chartAdviceScores.Series.Add(series16);
          this.chartAdviceScores.Size = new System.Drawing.Size(390, 266);
          this.chartAdviceScores.TabIndex = 0;
          this.chartAdviceScores.Text = "chart1";
@@ -575,17 +575,17 @@ namespace PendAdvisorClient
          this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
          this.pnlTitle.Location = new System.Drawing.Point(133, 0);
          this.pnlTitle.Name = "pnlTitle";
-         this.pnlTitle.Size = new System.Drawing.Size(644, 70);
+         this.pnlTitle.Size = new System.Drawing.Size(640, 70);
          this.pnlTitle.TabIndex = 2;
          // 
          // lblTitle
          // 
          this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
          this.lblTitle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         this.lblTitle.ForeColor = System.Drawing.Color.White;
+         this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(242)))), ((int)(((byte)(204)))));
          this.lblTitle.Location = new System.Drawing.Point(0, 0);
          this.lblTitle.Name = "lblTitle";
-         this.lblTitle.Size = new System.Drawing.Size(644, 70);
+         this.lblTitle.Size = new System.Drawing.Size(640, 70);
          this.lblTitle.TabIndex = 0;
          this.lblTitle.Text = "Claims Pend Advisor";
          this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -595,13 +595,13 @@ namespace PendAdvisorClient
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.BackColor = System.Drawing.Color.Fuchsia;
-         this.ClientSize = new System.Drawing.Size(777, 469);
+         this.BackColor = System.Drawing.SystemColors.Window;
+         this.ClientSize = new System.Drawing.Size(773, 465);
          this.ControlBox = false;
          this.Controls.Add(this.pnlTitle);
          this.Controls.Add(this.pnlMain);
          this.Controls.Add(this.pnlNavigation);
-         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
          this.Name = "MainForm";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.pnlNavigation.ResumeLayout(false);
