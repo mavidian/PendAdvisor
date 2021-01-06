@@ -25,9 +25,10 @@ namespace PendAdvisorClient
             RequestUri = new Uri(ML_SERVICE_URL),
             Content = new StringContent(payload)
          };
+         request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
          var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
          if (response.IsSuccessStatusCode) return await response.Content.ReadAsStringAsync();
-         return "Sorry, something went wrong!";
+         return null;  ///TODO: add some diagnostics
       }
 
    }

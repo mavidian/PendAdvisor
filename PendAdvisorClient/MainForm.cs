@@ -25,8 +25,9 @@ namespace PendAdvisorClient
          InitializeComponent();
 
          txtThreshold.Text = "90";
-         ////Scores = new double[] { 96D, 2D, 1D, 1D};
-         Scores = null;
+         Scores = new double[] { 96D, 2D, 1D, 1D };
+         Scores = new double[] { 20D, 25D, 10D, 35D };
+         ////Scores = null;
       }
 
 
@@ -104,7 +105,6 @@ namespace PendAdvisorClient
       }
 
 
-
       private void lblTitle_MouseDown(object sender, MouseEventArgs e)
       {
          //Move borderless form
@@ -117,10 +117,34 @@ namespace PendAdvisorClient
          this.Close();
       }
 
-      private void btnAdvice_Click(object sender, EventArgs e)
+      private async void btnAdvice_Click(object sender, EventArgs e)
       {
-         throw new NotImplementedException();
-         ////btnClose.Enabled = !btnClose.Enabled;
+         var adviceJson = await MlService.ObtainPendAdviceAsync(JsonConvert.SerializeObject(ClaimData));
+         if (adviceJson == null)
+         {
+            MessageBox.Show("Sorry, PendAdvisor service call failed!", "PendAdvisor Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+         }
+         var advice = JsonConvert.DeserializeObject<ModelOutput>(adviceJson);
+         ////Scores = new double[]
+         ////         {
+         ////            advice.ActionsAndScores.First(t => t.Action == "Release").Score,
+         ////            advice.ActionsAndScores.First(t => t.Action == "Deny").Score,
+         ////            advice.ActionsAndScores.First(t => t.Action == "Reprocess").Score,
+         ////            advice.ActionsAndScores.First(t => t.Action == "MedReview").Score
+         ////         };
+         
+         ////Scores = new double[]
+         //// {
+         ////            advice.Scores[0],
+         ////            advice.Scores[1],
+         ////            advice.Scores[2],
+         ////            advice.Scores[3]
+         //// };
+
+         Scores = advice.Scores.Select(s => (double)s).ToArray();
+
+     ///    btnClose.Enabled = advice.ActionsAndScores[0].Score > float.Parse(txtThreshold.Text);
       }
 
       private void txtThreshold_TextChanged(object sender, EventArgs e)
