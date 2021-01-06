@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PendAdvisorModel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -85,5 +88,39 @@ namespace PendAdvisorClient
          }
       }
 
+      private void flowpnlClaimData_DragEnter(object sender, DragEventArgs e)
+      {
+         if (e.Data.GetDataPresent(DataFormats.FileDrop))
+         {
+            e.Effect = DragDropEffects.Copy;
+            _dropFormatIsFile = true;
+         }
+         else if (e.Data.GetDataPresent(DataFormats.Text))
+         {
+            e.Effect = DragDropEffects.Copy;
+            _dropFormatIsFile = false;
+         }
+         else
+                  e.Effect = DragDropEffects.None;
+      }
+
+      private bool _dropFormatIsFile;
+
+      private void flowpnlClaimData_DragDrop(object sender, DragEventArgs e)
+      {
+         string jsonClaimData;
+         if (_dropFormatIsFile)
+         {
+            var x = e.Data.GetData(DataFormats.FileDrop);
+            using (var reader = File.OpenText(((string[])e.Data.GetData(DataFormats.FileDrop))[0]))
+            {
+               jsonClaimData = reader.ReadToEnd();
+            }
+         }
+         else //text dropped directly 
+            jsonClaimData = e.Data.GetData(DataFormats.Text).ToString();
+
+         var modelInput = JsonConvert.DeserializeObject<ModelInput>(jsonClaimData);
+      }
    }
 }

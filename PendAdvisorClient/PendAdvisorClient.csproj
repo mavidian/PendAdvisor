@@ -99,5 +99,16 @@
   <ItemGroup>
     <None Include="Resources\ML_brain_lite_green.png" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PendAdvisorModel\PendAdvisorModel.csproj">
+      <Project>{0ee59ae5-506e-449b-84a5-e62567f2874f}</Project>
+      <Name>PendAdvisorModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
