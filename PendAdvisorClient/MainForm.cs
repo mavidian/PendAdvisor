@@ -25,9 +25,9 @@ namespace PendAdvisorClient
          InitializeComponent();
 
          txtThreshold.Text = "90";
-         Scores = new double[] { 96D, 2D, 1D, 1D };
-         Scores = new double[] { 20D, 25D, 10D, 35D };
-         ////Scores = null;
+         ////Scores = new double[] { 96D, 2D, 1D, 1D };
+         ////Scores = new double[] { 20D, 25D, 10D, 35D };
+         Scores = null;
       }
 
 

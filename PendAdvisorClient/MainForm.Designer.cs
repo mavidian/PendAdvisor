@@ -29,12 +29,12 @@ namespace PendAdvisorClient
       /// </summary>
       private void InitializeComponent()
       {
-         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-         System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint33 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 28D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint34 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 24D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint35 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 26D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint36 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 22D);
+         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+         System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint13 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 28D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint14 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 24D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint15 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 26D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint16 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 22D);
          this.pnlNavigation = new System.Windows.Forms.Panel();
          this.btnApply = new System.Windows.Forms.Button();
          this.btnClaim = new System.Windows.Forms.Button();
@@ -90,10 +90,10 @@ namespace PendAdvisorClient
          this.pnlNavigation.Controls.Add(this.btnClose);
          this.pnlNavigation.Controls.Add(this.picCaduceus);
          this.pnlNavigation.Dock = System.Windows.Forms.DockStyle.Left;
-         this.pnlNavigation.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.pnlNavigation.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.pnlNavigation.Location = new System.Drawing.Point(0, 0);
          this.pnlNavigation.Name = "pnlNavigation";
-         this.pnlNavigation.Size = new System.Drawing.Size(133, 473);
+         this.pnlNavigation.Size = new System.Drawing.Size(133, 469);
          this.pnlNavigation.TabIndex = 0;
          // 
          // btnApply
@@ -101,7 +101,7 @@ namespace PendAdvisorClient
          this.btnApply.Enabled = false;
          this.btnApply.FlatAppearance.BorderSize = 0;
          this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-         this.btnApply.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.btnApply.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.btnApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(73)))), ((int)(((byte)(120)))));
          this.btnApply.Image = global::PendAdvisorClient.Properties.Resources.thumbs_up_36x36;
          this.btnApply.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,7 +118,7 @@ namespace PendAdvisorClient
          // 
          this.btnClaim.FlatAppearance.BorderSize = 0;
          this.btnClaim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-         this.btnClaim.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.btnClaim.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.btnClaim.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(73)))), ((int)(((byte)(120)))));
          this.btnClaim.Image = global::PendAdvisorClient.Properties.Resources.pencil_alt_36x36;
          this.btnClaim.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -126,7 +126,7 @@ namespace PendAdvisorClient
          this.btnClaim.Name = "btnClaim";
          this.btnClaim.Size = new System.Drawing.Size(113, 52);
          this.btnClaim.TabIndex = 3;
-         this.btnClaim.Text = "Claim";
+         this.btnClaim.Text = "Start";
          this.btnClaim.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          this.btnClaim.UseVisualStyleBackColor = true;
          this.btnClaim.Click += new System.EventHandler(this.btnClaim_Click);
@@ -135,7 +135,7 @@ namespace PendAdvisorClient
          // 
          this.btnAdvice.FlatAppearance.BorderSize = 0;
          this.btnAdvice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-         this.btnAdvice.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.btnAdvice.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.btnAdvice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(73)))), ((int)(((byte)(120)))));
          this.btnAdvice.Image = global::PendAdvisorClient.Properties.Resources.map_signs_36x36;
          this.btnAdvice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -143,7 +143,7 @@ namespace PendAdvisorClient
          this.btnAdvice.Name = "btnAdvice";
          this.btnAdvice.Size = new System.Drawing.Size(113, 52);
          this.btnAdvice.TabIndex = 2;
-         this.btnAdvice.Text = "Advice";
+         this.btnAdvice.Text = "Advise";
          this.btnAdvice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          this.btnAdvice.UseVisualStyleBackColor = true;
          this.btnAdvice.Click += new System.EventHandler(this.btnAdvice_Click);
@@ -152,7 +152,7 @@ namespace PendAdvisorClient
          // 
          this.btnClose.FlatAppearance.BorderSize = 0;
          this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-         this.btnClose.Font = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.btnClose.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.btnClose.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(73)))), ((int)(((byte)(120)))));
          this.btnClose.Image = global::PendAdvisorClient.Properties.Resources.share_blue_36x36;
          this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -187,7 +187,7 @@ namespace PendAdvisorClient
          this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
          this.pnlMain.Location = new System.Drawing.Point(133, 0);
          this.pnlMain.Name = "pnlMain";
-         this.pnlMain.Size = new System.Drawing.Size(644, 473);
+         this.pnlMain.Size = new System.Drawing.Size(644, 469);
          this.pnlMain.TabIndex = 1;
          // 
          // flowpnlClaimData
@@ -224,7 +224,7 @@ namespace PendAdvisorClient
          // 
          // lblMemberID
          // 
-         this.lblMemberID.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblMemberID.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblMemberID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblMemberID.Location = new System.Drawing.Point(3, 0);
          this.lblMemberID.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -232,7 +232,7 @@ namespace PendAdvisorClient
          this.lblMemberID.Size = new System.Drawing.Size(110, 26);
          this.lblMemberID.TabIndex = 6;
          this.lblMemberID.Text = "MemberID";
-         this.lblMemberID.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblMemberID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtMemberID
          // 
@@ -245,7 +245,7 @@ namespace PendAdvisorClient
          // 
          // lblClaimID
          // 
-         this.lblClaimID.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblClaimID.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblClaimID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblClaimID.Location = new System.Drawing.Point(3, 34);
          this.lblClaimID.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -253,7 +253,7 @@ namespace PendAdvisorClient
          this.lblClaimID.Size = new System.Drawing.Size(110, 26);
          this.lblClaimID.TabIndex = 8;
          this.lblClaimID.Text = "ClaimID";
-         this.lblClaimID.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblClaimID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtClaimID
          // 
@@ -266,7 +266,7 @@ namespace PendAdvisorClient
          // 
          // lblDateReceived
          // 
-         this.lblDateReceived.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblDateReceived.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblDateReceived.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblDateReceived.Location = new System.Drawing.Point(3, 68);
          this.lblDateReceived.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -274,7 +274,7 @@ namespace PendAdvisorClient
          this.lblDateReceived.Size = new System.Drawing.Size(110, 26);
          this.lblDateReceived.TabIndex = 10;
          this.lblDateReceived.Text = "DateReceived";
-         this.lblDateReceived.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblDateReceived.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtDateReceived
          // 
@@ -287,7 +287,7 @@ namespace PendAdvisorClient
          // 
          // lblProviderNPI
          // 
-         this.lblProviderNPI.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblProviderNPI.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblProviderNPI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblProviderNPI.Location = new System.Drawing.Point(3, 102);
          this.lblProviderNPI.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -295,7 +295,7 @@ namespace PendAdvisorClient
          this.lblProviderNPI.Size = new System.Drawing.Size(110, 26);
          this.lblProviderNPI.TabIndex = 12;
          this.lblProviderNPI.Text = "providerNPI";
-         this.lblProviderNPI.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblProviderNPI.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtProviderNPI
          // 
@@ -308,7 +308,7 @@ namespace PendAdvisorClient
          // 
          // lblDiagnosis1
          // 
-         this.lblDiagnosis1.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblDiagnosis1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblDiagnosis1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblDiagnosis1.Location = new System.Drawing.Point(3, 136);
          this.lblDiagnosis1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -316,7 +316,7 @@ namespace PendAdvisorClient
          this.lblDiagnosis1.Size = new System.Drawing.Size(110, 26);
          this.lblDiagnosis1.TabIndex = 14;
          this.lblDiagnosis1.Text = "Diagnosis1";
-         this.lblDiagnosis1.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblDiagnosis1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtDiagnosis1
          // 
@@ -329,7 +329,7 @@ namespace PendAdvisorClient
          // 
          // lblDiagnosis2
          // 
-         this.lblDiagnosis2.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblDiagnosis2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblDiagnosis2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblDiagnosis2.Location = new System.Drawing.Point(3, 170);
          this.lblDiagnosis2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -337,7 +337,7 @@ namespace PendAdvisorClient
          this.lblDiagnosis2.Size = new System.Drawing.Size(110, 26);
          this.lblDiagnosis2.TabIndex = 16;
          this.lblDiagnosis2.Text = "Diagnosis2";
-         this.lblDiagnosis2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblDiagnosis2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtDiagnosis2
          // 
@@ -350,7 +350,7 @@ namespace PendAdvisorClient
          // 
          // lblPOS
          // 
-         this.lblPOS.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblPOS.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblPOS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblPOS.Location = new System.Drawing.Point(3, 204);
          this.lblPOS.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -358,7 +358,7 @@ namespace PendAdvisorClient
          this.lblPOS.Size = new System.Drawing.Size(110, 26);
          this.lblPOS.TabIndex = 18;
          this.lblPOS.Text = "POS";
-         this.lblPOS.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblPOS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtPOS
          // 
@@ -371,7 +371,7 @@ namespace PendAdvisorClient
          // 
          // lblProcedureCode
          // 
-         this.lblProcedureCode.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblProcedureCode.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblProcedureCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblProcedureCode.Location = new System.Drawing.Point(3, 238);
          this.lblProcedureCode.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -379,7 +379,7 @@ namespace PendAdvisorClient
          this.lblProcedureCode.Size = new System.Drawing.Size(110, 26);
          this.lblProcedureCode.TabIndex = 20;
          this.lblProcedureCode.Text = "ProcedureCode";
-         this.lblProcedureCode.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblProcedureCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtProcedureCode
          // 
@@ -392,7 +392,7 @@ namespace PendAdvisorClient
          // 
          // lblUnits
          // 
-         this.lblUnits.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblUnits.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblUnits.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblUnits.Location = new System.Drawing.Point(3, 272);
          this.lblUnits.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -400,7 +400,7 @@ namespace PendAdvisorClient
          this.lblUnits.Size = new System.Drawing.Size(110, 26);
          this.lblUnits.TabIndex = 22;
          this.lblUnits.Text = "Units";
-         this.lblUnits.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblUnits.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtUnits
          // 
@@ -413,7 +413,7 @@ namespace PendAdvisorClient
          // 
          // lblPrice
          // 
-         this.lblPrice.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblPrice.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblPrice.Location = new System.Drawing.Point(3, 306);
          this.lblPrice.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -421,7 +421,7 @@ namespace PendAdvisorClient
          this.lblPrice.Size = new System.Drawing.Size(110, 26);
          this.lblPrice.TabIndex = 24;
          this.lblPrice.Text = "Price";
-         this.lblPrice.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtPrice
          // 
@@ -434,7 +434,7 @@ namespace PendAdvisorClient
          // 
          // lblPendReason
          // 
-         this.lblPendReason.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblPendReason.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblPendReason.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
          this.lblPendReason.Location = new System.Drawing.Point(3, 340);
          this.lblPendReason.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
@@ -442,7 +442,7 @@ namespace PendAdvisorClient
          this.lblPendReason.Size = new System.Drawing.Size(110, 26);
          this.lblPendReason.TabIndex = 26;
          this.lblPendReason.Text = "PendReason";
-         this.lblPendReason.TextAlign = System.Drawing.ContentAlignment.TopRight;
+         this.lblPendReason.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
          // 
          // txtPendReason
          // 
@@ -456,7 +456,7 @@ namespace PendAdvisorClient
          // picMLBrain
          // 
          this.picMLBrain.Image = global::PendAdvisorClient.Properties.Resources.ML_brain_lite_green;
-         this.picMLBrain.Location = new System.Drawing.Point(409, 168);
+         this.picMLBrain.Location = new System.Drawing.Point(410, 187);
          this.picMLBrain.Name = "picMLBrain";
          this.picMLBrain.Size = new System.Drawing.Size(127, 107);
          this.picMLBrain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -466,12 +466,12 @@ namespace PendAdvisorClient
          // lblRecommendation
          // 
          this.lblRecommendation.AutoSize = true;
-         this.lblRecommendation.Font = new System.Drawing.Font("Segoe Print", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblRecommendation.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblRecommendation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         this.lblRecommendation.Location = new System.Drawing.Point(280, 380);
-         this.lblRecommendation.MaximumSize = new System.Drawing.Size(330, 0);
+         this.lblRecommendation.Location = new System.Drawing.Point(281, 389);
+         this.lblRecommendation.MaximumSize = new System.Drawing.Size(380, 0);
          this.lblRecommendation.Name = "lblRecommendation";
-         this.lblRecommendation.Size = new System.Drawing.Size(327, 66);
+         this.lblRecommendation.Size = new System.Drawing.Size(339, 44);
          this.lblRecommendation.TabIndex = 3;
          this.lblRecommendation.Text = "Recommended action is ... with ...% confidence.";
          // 
@@ -488,82 +488,82 @@ namespace PendAdvisorClient
          // lblThreshold
          // 
          this.lblThreshold.AutoSize = true;
-         this.lblThreshold.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblThreshold.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblThreshold.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         this.lblThreshold.Location = new System.Drawing.Point(479, 84);
+         this.lblThreshold.Location = new System.Drawing.Point(481, 88);
          this.lblThreshold.Name = "lblThreshold";
-         this.lblThreshold.Size = new System.Drawing.Size(74, 23);
+         this.lblThreshold.Size = new System.Drawing.Size(72, 15);
          this.lblThreshold.TabIndex = 1;
          this.lblThreshold.Text = "Threshold";
          // 
          // chartAdviceScores
          // 
          this.chartAdviceScores.BackColor = System.Drawing.Color.Transparent;
-         chartArea9.AxisX.IsLabelAutoFit = false;
-         chartArea9.AxisX.IsMarginVisible = false;
-         chartArea9.AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea9.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea9.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea9.AxisX.MajorGrid.Enabled = false;
-         chartArea9.AxisX.ScaleBreakStyle.Enabled = true;
-         chartArea9.AxisX.Title = "Advice";
-         chartArea9.AxisX.TitleFont = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea9.AxisX.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea9.AxisY.Interval = 25D;
-         chartArea9.AxisY.IsLabelAutoFit = false;
-         chartArea9.AxisY.LabelStyle.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea9.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea9.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea9.AxisY.MajorGrid.Enabled = false;
-         chartArea9.AxisY.Maximum = 100D;
-         chartArea9.AxisY.Minimum = 0D;
-         chartArea9.AxisY.MinorGrid.Enabled = true;
-         chartArea9.AxisY.MinorGrid.Interval = 100D;
-         chartArea9.AxisY.MinorGrid.IntervalOffset = 50D;
-         chartArea9.AxisY.MinorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-         chartArea9.AxisY.MinorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-         chartArea9.AxisY.MinorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea9.AxisY.Title = "Score";
-         chartArea9.AxisY.TitleFont = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea9.AxisY.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea9.BackColor = System.Drawing.Color.Transparent;
-         chartArea9.Name = "ChartArea1";
-         this.chartAdviceScores.ChartAreas.Add(chartArea9);
+         chartArea4.AxisX.IsLabelAutoFit = false;
+         chartArea4.AxisX.IsMarginVisible = false;
+         chartArea4.AxisX.LabelStyle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea4.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea4.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea4.AxisX.MajorGrid.Enabled = false;
+         chartArea4.AxisX.ScaleBreakStyle.Enabled = true;
+         chartArea4.AxisX.Title = "Advice";
+         chartArea4.AxisX.TitleFont = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea4.AxisX.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea4.AxisY.Interval = 25D;
+         chartArea4.AxisY.IsLabelAutoFit = false;
+         chartArea4.AxisY.LabelStyle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea4.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea4.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea4.AxisY.MajorGrid.Enabled = false;
+         chartArea4.AxisY.Maximum = 100D;
+         chartArea4.AxisY.Minimum = 0D;
+         chartArea4.AxisY.MinorGrid.Enabled = true;
+         chartArea4.AxisY.MinorGrid.Interval = 100D;
+         chartArea4.AxisY.MinorGrid.IntervalOffset = 50D;
+         chartArea4.AxisY.MinorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+         chartArea4.AxisY.MinorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+         chartArea4.AxisY.MinorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea4.AxisY.Title = "Score";
+         chartArea4.AxisY.TitleFont = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea4.AxisY.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea4.BackColor = System.Drawing.Color.Transparent;
+         chartArea4.Name = "ChartArea1";
+         this.chartAdviceScores.ChartAreas.Add(chartArea4);
          this.chartAdviceScores.Location = new System.Drawing.Point(248, 111);
          this.chartAdviceScores.Name = "chartAdviceScores";
-         series9.ChartArea = "ChartArea1";
-         series9.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         series9.IsValueShownAsLabel = true;
-         series9.Name = "Series1";
-         dataPoint33.AxisLabel = "Release";
-         dataPoint33.Color = System.Drawing.Color.Green;
-         dataPoint33.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint33.IsValueShownAsLabel = true;
-         dataPoint33.Label = "";
-         dataPoint33.LabelForeColor = System.Drawing.Color.DarkGreen;
-         dataPoint33.LabelFormat = "";
-         dataPoint34.AxisLabel = "Deny";
-         dataPoint34.Color = System.Drawing.Color.Firebrick;
-         dataPoint34.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint34.Label = "";
-         dataPoint34.LabelForeColor = System.Drawing.Color.DarkRed;
-         dataPoint35.AxisLabel = "Reprocess";
-         dataPoint35.Color = System.Drawing.Color.Orange;
-         dataPoint35.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint35.Label = "";
-         dataPoint35.LabelForeColor = System.Drawing.Color.Peru;
-         dataPoint36.AxisLabel = "MedReview";
-         dataPoint36.Color = System.Drawing.Color.RoyalBlue;
-         dataPoint36.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint36.Label = "";
-         dataPoint36.LabelForeColor = System.Drawing.Color.MediumBlue;
-         series9.Points.Add(dataPoint33);
-         series9.Points.Add(dataPoint34);
-         series9.Points.Add(dataPoint35);
-         series9.Points.Add(dataPoint36);
-         series9.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-         series9.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
-         this.chartAdviceScores.Series.Add(series9);
+         series4.ChartArea = "ChartArea1";
+         series4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         series4.IsValueShownAsLabel = true;
+         series4.Name = "Series1";
+         dataPoint13.AxisLabel = "Release";
+         dataPoint13.Color = System.Drawing.Color.Green;
+         dataPoint13.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint13.IsValueShownAsLabel = true;
+         dataPoint13.Label = "";
+         dataPoint13.LabelForeColor = System.Drawing.Color.DarkGreen;
+         dataPoint13.LabelFormat = "";
+         dataPoint14.AxisLabel = "Deny";
+         dataPoint14.Color = System.Drawing.Color.Firebrick;
+         dataPoint14.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint14.Label = "";
+         dataPoint14.LabelForeColor = System.Drawing.Color.DarkRed;
+         dataPoint15.AxisLabel = "Reprocess";
+         dataPoint15.Color = System.Drawing.Color.Orange;
+         dataPoint15.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint15.Label = "";
+         dataPoint15.LabelForeColor = System.Drawing.Color.Peru;
+         dataPoint16.AxisLabel = "MedReview";
+         dataPoint16.Color = System.Drawing.Color.RoyalBlue;
+         dataPoint16.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint16.Label = "";
+         dataPoint16.LabelForeColor = System.Drawing.Color.MediumBlue;
+         series4.Points.Add(dataPoint13);
+         series4.Points.Add(dataPoint14);
+         series4.Points.Add(dataPoint15);
+         series4.Points.Add(dataPoint16);
+         series4.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+         series4.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
+         this.chartAdviceScores.Series.Add(series4);
          this.chartAdviceScores.Size = new System.Drawing.Size(390, 266);
          this.chartAdviceScores.TabIndex = 0;
          this.chartAdviceScores.Text = "chart1";
@@ -581,13 +581,13 @@ namespace PendAdvisorClient
          // lblTitle
          // 
          this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.lblTitle.Font = new System.Drawing.Font("Segoe Print", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         this.lblTitle.Font = new System.Drawing.Font("Arial Rounded MT Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.lblTitle.ForeColor = System.Drawing.Color.White;
          this.lblTitle.Location = new System.Drawing.Point(0, 0);
          this.lblTitle.Name = "lblTitle";
          this.lblTitle.Size = new System.Drawing.Size(644, 70);
          this.lblTitle.TabIndex = 0;
-         this.lblTitle.Text = "PendAdvisor Client";
+         this.lblTitle.Text = "Claims Pend Advisor";
          this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
          this.lblTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblTitle_MouseDown);
          // 
@@ -596,7 +596,7 @@ namespace PendAdvisorClient
          this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.BackColor = System.Drawing.Color.Fuchsia;
-         this.ClientSize = new System.Drawing.Size(777, 473);
+         this.ClientSize = new System.Drawing.Size(777, 469);
          this.ControlBox = false;
          this.Controls.Add(this.pnlTitle);
          this.Controls.Add(this.pnlMain);
