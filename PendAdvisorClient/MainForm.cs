@@ -43,5 +43,6 @@ namespace PendAdvisorClient
       {
          btnClose.Enabled = !btnClose.Enabled;
       }
+
    }
 }
