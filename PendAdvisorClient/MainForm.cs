@@ -31,7 +31,7 @@ namespace PendAdvisorClient
 
 
       /// <summary>
-      /// Write only property containing 4 score values for Release, Deny, Reprocess & MedReview respectively.
+      /// Write-only property containing 4 score values for Release, Deny, Reprocess & MedReview respectively.
       /// Setting this property populated the grid.
       /// Can be set to null, whcih means reset.
       /// </summary>
@@ -62,6 +62,48 @@ namespace PendAdvisorClient
             for (var i = 0; i < 4; i++) pointsToSet[i].SetValueY(valuesToAssign[i]);
          }
       }
+
+
+      /// <summary>
+      /// Expose form controls holding claim data as model input (to be serialized as JSON).
+      /// Get retries model input from the form; set populates for with model input data.
+      /// </summary>
+      private ModelInput ClaimData
+      {
+         get
+         {
+            return new ModelInput
+            {
+               MemberID = txtMemberID.Text,
+               ClaimID = txtClaimID.Text,
+               DateReceived = txtDateReceived.Text,
+               providerNPI = txtProviderNPI.Text,
+               Diagnosis1 = txtDiagnosis1.Text,
+               Diagnosis2 = txtDiagnosis2.Text,
+               POS = txtPOS.Text,
+               ProcedureCode = txtProcedureCode.Text,
+               Units = float.Parse(txtUnits.Text),
+               Price = float.Parse(txtPrice.Text),
+               PendReason = txtPendReason.Text
+            };
+         }
+         set
+         {
+            txtMemberID.Text = value.MemberID;
+            txtClaimID.Text = value.ClaimID;
+            txtDateReceived.Text = value.DateReceived;
+            txtProviderNPI.Text = value.providerNPI;
+            txtDiagnosis1.Text = value.Diagnosis1;
+            txtDiagnosis2.Text = value.Diagnosis2;
+            txtPOS.Text = value.POS;
+            txtProcedureCode.Text = value.ProcedureCode;
+            txtUnits.Text = value.Units.ToString();
+            txtPrice.Text = value.Price.ToString();
+            txtPendReason.Text = value.PendReason;
+         }
+      }
+
+
 
       private void lblTitle_MouseDown(object sender, MouseEventArgs e)
       {
@@ -120,7 +162,7 @@ namespace PendAdvisorClient
          else //text dropped directly 
             jsonClaimData = e.Data.GetData(DataFormats.Text).ToString();
 
-         var modelInput = JsonConvert.DeserializeObject<ModelInput>(jsonClaimData);
+         ClaimData = JsonConvert.DeserializeObject<ModelInput>(jsonClaimData);
       }
    }
 }
