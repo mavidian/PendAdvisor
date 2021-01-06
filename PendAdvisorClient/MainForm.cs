@@ -45,12 +45,15 @@ namespace PendAdvisorClient
                valuesToAssign = new double[] { 0D, 0D, 0D, 0D };
                chartAdviceScores.Series[0].Points[0].SetValueY(0D);
                lblRecommendation.Text = string.Empty;
+               picMLBrain.Visible = true;
+
             }
             else
             {
                valuesToAssign = value;
                var topIndex = valuesToAssign.ToList().IndexOf(valuesToAssign.Max());
                lblRecommendation.Text = $"Recommended action is {new List<string>{ "Release", "Deny", "Reprocess", "MedReview" }[topIndex]} with {valuesToAssign[topIndex]:#0.0}% confidence.";
+               picMLBrain.Visible = false;
             }
             var pointsToSet = chartAdviceScores.Series[0].Points;
             for (var i = 0; i < 4; i++) pointsToSet[i].SetValueY(valuesToAssign[i]);

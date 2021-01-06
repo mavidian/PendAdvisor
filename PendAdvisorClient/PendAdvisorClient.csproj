@@ -96,5 +96,8 @@
   <ItemGroup>
     <None Include="Resources\pencil-alt_36x36.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ML_brain_lite_green.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -83,6 +83,16 @@ namespace PendAdvisorClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ML_brain_lite_green {
+            get {
+                object obj = ResourceManager.GetObject("ML_brain_lite_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pencil_alt_36x36 {
             get {
                 object obj = ResourceManager.GetObject("pencil-alt_36x36", resourceCulture);
