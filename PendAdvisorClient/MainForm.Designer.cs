@@ -29,12 +29,12 @@ namespace PendAdvisorClient
       /// </summary>
       private void InitializeComponent()
       {
-         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-         System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 28D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint10 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 24D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint11 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 26D);
-         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint12 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 22D);
+         System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+         System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint25 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 28D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint26 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 24D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint27 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 26D);
+         System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint28 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0D, 22D);
          this.pnlNavigation = new System.Windows.Forms.Panel();
          this.btnApply = new System.Windows.Forms.Button();
          this.btnClaim = new System.Windows.Forms.Button();
@@ -238,7 +238,7 @@ namespace PendAdvisorClient
          this.txtMemberID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtMemberID.Location = new System.Drawing.Point(119, 3);
          this.txtMemberID.Name = "txtMemberID";
-         this.txtMemberID.Size = new System.Drawing.Size(33, 17);
+         this.txtMemberID.Size = new System.Drawing.Size(84, 17);
          this.txtMemberID.TabIndex = 7;
          // 
          // lblClaimID
@@ -259,7 +259,7 @@ namespace PendAdvisorClient
          this.txtClaimID.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtClaimID.Location = new System.Drawing.Point(119, 37);
          this.txtClaimID.Name = "txtClaimID";
-         this.txtClaimID.Size = new System.Drawing.Size(33, 17);
+         this.txtClaimID.Size = new System.Drawing.Size(104, 17);
          this.txtClaimID.TabIndex = 9;
          // 
          // lblDateReceived
@@ -280,7 +280,7 @@ namespace PendAdvisorClient
          this.txtDateReceived.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtDateReceived.Location = new System.Drawing.Point(119, 71);
          this.txtDateReceived.Name = "txtDateReceived";
-         this.txtDateReceived.Size = new System.Drawing.Size(33, 17);
+         this.txtDateReceived.Size = new System.Drawing.Size(70, 17);
          this.txtDateReceived.TabIndex = 11;
          // 
          // lblProviderNPI
@@ -301,7 +301,7 @@ namespace PendAdvisorClient
          this.txtProviderNPI.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtProviderNPI.Location = new System.Drawing.Point(119, 105);
          this.txtProviderNPI.Name = "txtProviderNPI";
-         this.txtProviderNPI.Size = new System.Drawing.Size(33, 17);
+         this.txtProviderNPI.Size = new System.Drawing.Size(88, 17);
          this.txtProviderNPI.TabIndex = 13;
          // 
          // lblDiagnosis1
@@ -364,7 +364,7 @@ namespace PendAdvisorClient
          this.txtPOS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtPOS.Location = new System.Drawing.Point(119, 207);
          this.txtPOS.Name = "txtPOS";
-         this.txtPOS.Size = new System.Drawing.Size(33, 17);
+         this.txtPOS.Size = new System.Drawing.Size(22, 17);
          this.txtPOS.TabIndex = 19;
          // 
          // lblProcedureCode
@@ -385,7 +385,7 @@ namespace PendAdvisorClient
          this.txtProcedureCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtProcedureCode.Location = new System.Drawing.Point(119, 241);
          this.txtProcedureCode.Name = "txtProcedureCode";
-         this.txtProcedureCode.Size = new System.Drawing.Size(33, 17);
+         this.txtProcedureCode.Size = new System.Drawing.Size(48, 17);
          this.txtProcedureCode.TabIndex = 21;
          // 
          // lblUnits
@@ -406,7 +406,7 @@ namespace PendAdvisorClient
          this.txtUnits.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtUnits.Location = new System.Drawing.Point(119, 275);
          this.txtUnits.Name = "txtUnits";
-         this.txtUnits.Size = new System.Drawing.Size(33, 17);
+         this.txtUnits.Size = new System.Drawing.Size(22, 17);
          this.txtUnits.TabIndex = 23;
          // 
          // lblPrice
@@ -427,7 +427,7 @@ namespace PendAdvisorClient
          this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtPrice.Location = new System.Drawing.Point(119, 309);
          this.txtPrice.Name = "txtPrice";
-         this.txtPrice.Size = new System.Drawing.Size(33, 17);
+         this.txtPrice.Size = new System.Drawing.Size(46, 17);
          this.txtPrice.TabIndex = 25;
          // 
          // lblPendReason
@@ -448,7 +448,7 @@ namespace PendAdvisorClient
          this.txtPendReason.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtPendReason.Location = new System.Drawing.Point(119, 343);
          this.txtPendReason.Name = "txtPendReason";
-         this.txtPendReason.Size = new System.Drawing.Size(33, 17);
+         this.txtPendReason.Size = new System.Drawing.Size(40, 17);
          this.txtPendReason.TabIndex = 27;
          // 
          // picMLBrain
@@ -479,7 +479,7 @@ namespace PendAdvisorClient
          this.txtThreshold.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
          this.txtThreshold.Location = new System.Drawing.Point(559, 88);
          this.txtThreshold.Name = "txtThreshold";
-         this.txtThreshold.Size = new System.Drawing.Size(33, 17);
+         this.txtThreshold.Size = new System.Drawing.Size(24, 17);
          this.txtThreshold.TabIndex = 2;
          this.txtThreshold.TextChanged += new System.EventHandler(this.txtThreshold_TextChanged);
          // 
@@ -497,71 +497,71 @@ namespace PendAdvisorClient
          // chartAdviceScores
          // 
          this.chartAdviceScores.BackColor = System.Drawing.Color.Transparent;
-         chartArea3.AxisX.IsLabelAutoFit = false;
-         chartArea3.AxisX.IsMarginVisible = false;
-         chartArea3.AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea3.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea3.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea3.AxisX.MajorGrid.Enabled = false;
-         chartArea3.AxisX.ScaleBreakStyle.Enabled = true;
-         chartArea3.AxisX.Title = "Advice";
-         chartArea3.AxisX.TitleFont = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea3.AxisX.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea3.AxisY.Interval = 25D;
-         chartArea3.AxisY.IsLabelAutoFit = false;
-         chartArea3.AxisY.LabelStyle.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea3.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea3.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea3.AxisY.MajorGrid.Enabled = false;
-         chartArea3.AxisY.Maximum = 100D;
-         chartArea3.AxisY.Minimum = 0D;
-         chartArea3.AxisY.MinorGrid.Enabled = true;
-         chartArea3.AxisY.MinorGrid.Interval = 100D;
-         chartArea3.AxisY.MinorGrid.IntervalOffset = 50D;
-         chartArea3.AxisY.MinorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-         chartArea3.AxisY.MinorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-         chartArea3.AxisY.MinorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea3.AxisY.Title = "Score";
-         chartArea3.AxisY.TitleFont = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         chartArea3.AxisY.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
-         chartArea3.BackColor = System.Drawing.Color.Transparent;
-         chartArea3.Name = "ChartArea1";
-         this.chartAdviceScores.ChartAreas.Add(chartArea3);
+         chartArea7.AxisX.IsLabelAutoFit = false;
+         chartArea7.AxisX.IsMarginVisible = false;
+         chartArea7.AxisX.LabelStyle.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea7.AxisX.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea7.AxisX.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea7.AxisX.MajorGrid.Enabled = false;
+         chartArea7.AxisX.ScaleBreakStyle.Enabled = true;
+         chartArea7.AxisX.Title = "Advice";
+         chartArea7.AxisX.TitleFont = new System.Drawing.Font("Segoe Print", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea7.AxisX.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea7.AxisY.Interval = 25D;
+         chartArea7.AxisY.IsLabelAutoFit = false;
+         chartArea7.AxisY.LabelStyle.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea7.AxisY.LabelStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea7.AxisY.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea7.AxisY.MajorGrid.Enabled = false;
+         chartArea7.AxisY.Maximum = 100D;
+         chartArea7.AxisY.Minimum = 0D;
+         chartArea7.AxisY.MinorGrid.Enabled = true;
+         chartArea7.AxisY.MinorGrid.Interval = 100D;
+         chartArea7.AxisY.MinorGrid.IntervalOffset = 50D;
+         chartArea7.AxisY.MinorGrid.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+         chartArea7.AxisY.MinorGrid.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+         chartArea7.AxisY.MinorGrid.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea7.AxisY.Title = "Score";
+         chartArea7.AxisY.TitleFont = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         chartArea7.AxisY.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(4)))), ((int)(((byte)(81)))), ((int)(((byte)(75)))));
+         chartArea7.BackColor = System.Drawing.Color.Transparent;
+         chartArea7.Name = "ChartArea1";
+         this.chartAdviceScores.ChartAreas.Add(chartArea7);
          this.chartAdviceScores.Location = new System.Drawing.Point(248, 111);
          this.chartAdviceScores.Name = "chartAdviceScores";
-         series3.ChartArea = "ChartArea1";
-         series3.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         series3.IsValueShownAsLabel = true;
-         series3.Name = "Series1";
-         dataPoint9.AxisLabel = "Release";
-         dataPoint9.Color = System.Drawing.Color.Green;
-         dataPoint9.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint9.IsValueShownAsLabel = true;
-         dataPoint9.Label = "";
-         dataPoint9.LabelForeColor = System.Drawing.Color.DarkGreen;
-         dataPoint9.LabelFormat = "";
-         dataPoint10.AxisLabel = "Deny";
-         dataPoint10.Color = System.Drawing.Color.Firebrick;
-         dataPoint10.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint10.Label = "";
-         dataPoint10.LabelForeColor = System.Drawing.Color.DarkRed;
-         dataPoint11.AxisLabel = "Reprocess";
-         dataPoint11.Color = System.Drawing.Color.Orange;
-         dataPoint11.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint11.Label = "";
-         dataPoint11.LabelForeColor = System.Drawing.Color.Peru;
-         dataPoint12.AxisLabel = "MedReview";
-         dataPoint12.Color = System.Drawing.Color.RoyalBlue;
-         dataPoint12.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-         dataPoint12.Label = "";
-         dataPoint12.LabelForeColor = System.Drawing.Color.MediumBlue;
-         series3.Points.Add(dataPoint9);
-         series3.Points.Add(dataPoint10);
-         series3.Points.Add(dataPoint11);
-         series3.Points.Add(dataPoint12);
-         series3.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-         series3.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
-         this.chartAdviceScores.Series.Add(series3);
+         series7.ChartArea = "ChartArea1";
+         series7.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         series7.IsValueShownAsLabel = true;
+         series7.Name = "Series1";
+         dataPoint25.AxisLabel = "Release";
+         dataPoint25.Color = System.Drawing.Color.Green;
+         dataPoint25.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint25.IsValueShownAsLabel = true;
+         dataPoint25.Label = "";
+         dataPoint25.LabelForeColor = System.Drawing.Color.DarkGreen;
+         dataPoint25.LabelFormat = "";
+         dataPoint26.AxisLabel = "Deny";
+         dataPoint26.Color = System.Drawing.Color.Firebrick;
+         dataPoint26.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint26.Label = "";
+         dataPoint26.LabelForeColor = System.Drawing.Color.DarkRed;
+         dataPoint27.AxisLabel = "Reprocess";
+         dataPoint27.Color = System.Drawing.Color.Orange;
+         dataPoint27.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint27.Label = "";
+         dataPoint27.LabelForeColor = System.Drawing.Color.Peru;
+         dataPoint28.AxisLabel = "MedReview";
+         dataPoint28.Color = System.Drawing.Color.RoyalBlue;
+         dataPoint28.Font = new System.Drawing.Font("Segoe Print", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+         dataPoint28.Label = "";
+         dataPoint28.LabelForeColor = System.Drawing.Color.MediumBlue;
+         series7.Points.Add(dataPoint25);
+         series7.Points.Add(dataPoint26);
+         series7.Points.Add(dataPoint27);
+         series7.Points.Add(dataPoint28);
+         series7.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+         series7.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Single;
+         this.chartAdviceScores.Series.Add(series7);
          this.chartAdviceScores.Size = new System.Drawing.Size(390, 266);
          this.chartAdviceScores.TabIndex = 0;
          this.chartAdviceScores.Text = "chart1";
