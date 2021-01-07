@@ -27,7 +27,7 @@ namespace PendAdvisorClient
          Scores = null;
          txtThreshold.Text = "90";
 
-         btnAdvice.Enabled = true;
+         btnAdvise.Enabled = true;
       }
 
 
@@ -120,7 +120,7 @@ namespace PendAdvisorClient
          this.Close();
       }
 
-      private async void btnAdvice_Click(object sender, EventArgs e)
+      private async void btnAdvise_Click(object sender, EventArgs e)
       {
          var adviceJson = await MlService.ObtainPendAdviceAsync(JsonConvert.SerializeObject(ClaimData));
          if (adviceJson == null)
@@ -137,7 +137,7 @@ namespace PendAdvisorClient
                      advice.ActionsAndScores.First(t => t.Action == "MedReview").Score * 100f
                   };
 
-         btnAdvice.Enabled = false;
+         btnAdvise.Enabled = false;
          btnApply.Enabled = advice.AdviceScore * 100f > float.Parse(txtThreshold.Text);
          if (double.TryParse((txtThreshold.Text), out var threshold))
          {
@@ -199,11 +199,11 @@ namespace PendAdvisorClient
       }
 
 
-      private void btnClaim_Click(object sender, EventArgs e)
+      private void btnStart_Click(object sender, EventArgs e)
       {
          ClaimData = null;
          Scores = null;
-         btnAdvice.Enabled = true;
+         btnAdvise.Enabled = true;
       }
 
 
