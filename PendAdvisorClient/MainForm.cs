@@ -26,8 +26,6 @@ namespace PendAdvisorClient
          ClaimData = null;
          Scores = null;
          txtThreshold.Text = "90";
-
-         btnAdvise.Enabled = true;
       }
 
 
@@ -137,7 +135,6 @@ namespace PendAdvisorClient
                      advice.ActionsAndScores.First(t => t.Action == "MedReview").Score * 100f
                   };
 
-         btnAdvise.Enabled = false;
          btnApply.Enabled = advice.AdviceScore * 100f > float.Parse(txtThreshold.Text);
          if (double.TryParse((txtThreshold.Text), out var threshold))
          {
@@ -203,7 +200,6 @@ namespace PendAdvisorClient
       {
          ClaimData = null;
          Scores = null;
-         btnAdvise.Enabled = true;
       }
 
 
