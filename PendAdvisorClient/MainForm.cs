@@ -24,30 +24,30 @@ namespace PendAdvisorClient
          InitializeComponent();
 
          ClaimData = null;
-         ////Scores = new double[] { 96D, 2D, 1D, 1D };
-         ////Scores = new double[] { 20D, 25D, 10D, 35D };
+         ////Scores = new float[] { 96.2f, 2f, 1f, .8f };
+         ////Scores = new float[] { 20f, 25f, 10f, 45f };
          Scores = null;
          txtThreshold.Text = "90";
       }
 
 
       /// <summary>
-      /// Write-only property containing 4 score values for Release, Deny, Reprocess & MedReview respectively.
-      /// Setting this property populated the grid.
-      /// Can be set to null, whcih means reset.
+      /// Write-only property containing the 4 score values for Release, Deny, Reprocess & MedReview respectively.
+      /// Note that the values are expressed as  percentages and not fractions.
+      /// Setting this property populates the grid; setting to null means reset.
       /// </summary>
-      private double[] Scores
+      private float[] Scores
       {
          set
          {
             // 0-Release, 1-Deny, 2-Reprocess, 3-MedReview
-            double[] valuesToAssign;
+            float[] valuesToAssign;
             Debug.Assert(value == null || value.Count() == 4);
-            Debug.Assert(value == null || value.Sum() - 100D < .001);
+            Debug.Assert(value == null || Math.Abs(value.Sum() - 100f) < .1);
             if (value == null)
             {
-               valuesToAssign = new double[] { 0D, 0D, 0D, 0D };
-               chartAdviceScores.Series[0].Points[0].SetValueY(0D);
+               valuesToAssign = new float[] { 0f, 0f, 0f, 0f };
+               chartAdviceScores.Series[0].Points[0].SetValueY(0f);
                lblRecommendation.Text = string.Empty;
                picMLBrain.Visible = true;
 
@@ -61,6 +61,7 @@ namespace PendAdvisorClient
             }
             var pointsToSet = chartAdviceScores.Series[0].Points;
             for (var i = 0; i < 4; i++) pointsToSet[i].SetValueY(valuesToAssign[i]);
+            chartAdviceScores.Invalidate();  // needed to redraw the chart
          }
       }
 
@@ -126,25 +127,15 @@ namespace PendAdvisorClient
             return;
          }
          var advice = JsonConvert.DeserializeObject<AdviceData>(adviceJson);
-         ////Scores = new double[]
-         ////         {
-         ////            advice.ActionsAndScores.First(t => t.Action == "Release").Score,
-         ////            advice.ActionsAndScores.First(t => t.Action == "Deny").Score,
-         ////            advice.ActionsAndScores.First(t => t.Action == "Reprocess").Score,
-         ////            advice.ActionsAndScores.First(t => t.Action == "MedReview").Score
-         ////         };
+         Scores = new float[]
+                  {  //fractions are converted to percentages
+                     advice.ActionsAndScores.First(t => t.Action == "Release").Score * 100f,
+                     advice.ActionsAndScores.First(t => t.Action == "Deny").Score * 100f,
+                     advice.ActionsAndScores.First(t => t.Action == "Reprocess").Score * 100f,
+                     advice.ActionsAndScores.First(t => t.Action == "MedReview").Score * 100f
+                  };
 
-         ////Scores = new double[]
-         //// {
-         ////            advice.Scores[0],
-         ////            advice.Scores[1],
-         ////            advice.Scores[2],
-         ////            advice.Scores[3]
-         //// };
-
-//         Scores = advice.Scores.Select(s => (double)s).ToArray();
-
-     ///    btnClose.Enabled = advice.ActionsAndScores[0].Score > float.Parse(txtThreshold.Text);
+         btnApply.Enabled = advice.AdviceScore > float.Parse(txtThreshold.Text);
       }
 
       private void txtThreshold_TextChanged(object sender, EventArgs e)
@@ -193,6 +184,7 @@ namespace PendAdvisorClient
       private void btnClaim_Click(object sender, EventArgs e)
       {
          ClaimData = null;
+         Scores = null;
       }
 
       private void btnApply_Click(object sender, EventArgs e)
