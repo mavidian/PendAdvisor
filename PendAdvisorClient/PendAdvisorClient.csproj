@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdviceData.cs" />
+    <Compile Include="ApplyPopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplyPopupForm.Designer.cs">
+      <DependentUpon>ApplyPopupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClaimData.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -58,6 +64,9 @@
     <Compile Include="MlService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ApplyPopupForm.resx">
+      <DependentUpon>ApplyPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +115,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud_empty.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

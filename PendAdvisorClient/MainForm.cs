@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -205,7 +206,27 @@ namespace PendAdvisorClient
 
       private void btnApply_Click(object sender, EventArgs e)
       {
-         throw new NotImplementedException();
+         var popup = new ApplyPopupForm();
+         switch (Scores.ToList().IndexOf(Scores.Max()))
+         {
+            case 0:
+               popup.ForeColor = Color.DarkGreen;
+               popup.Text = $"Claim '{txtClaimID.Text}' is being released ...";
+               break;
+            case 1:
+               popup.ForeColor = Color.DarkRed;
+               popup.Text = $"Claim '{txtClaimID.Text}' is being denied ...";
+               break;
+            case 2:
+               popup.ForeColor = Color.Peru;
+               popup.Text = $"Claim '{txtClaimID.Text}' is being updated and reprocessed ...";
+               break;
+            case 3:
+               popup.ForeColor = Color.MediumBlue;
+               popup.Text = $"Claim '{txtClaimID.Text}' is being forwarded to Medical Review ...";
+               break;
+         }
+         popup.ShowDialog(this);
       }
    }
 }
