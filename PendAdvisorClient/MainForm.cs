@@ -226,6 +226,7 @@ namespace PendAdvisorClient
                popup.Text = $"Claim '{txtClaimID.Text}' is being forwarded to Medical Review ...";
                break;
          }
+         btnApply.Enabled = false;
          popup.ShowDialog(this);
       }
    }
