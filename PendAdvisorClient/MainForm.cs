@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using PendAdvisorModel;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,10 +23,11 @@ namespace PendAdvisorClient
       {
          InitializeComponent();
 
-         txtThreshold.Text = "90";
+         ClaimData = null;
          ////Scores = new double[] { 96D, 2D, 1D, 1D };
          ////Scores = new double[] { 20D, 25D, 10D, 35D };
          Scores = null;
+         txtThreshold.Text = "90";
       }
 
 
@@ -69,11 +69,11 @@ namespace PendAdvisorClient
       /// Expose form controls holding claim data as model input (to be serialized as JSON).
       /// Get retries model input from the form; set populates for with model input data (null to reset contents).
       /// </summary>
-      private ModelInput ClaimData
+      private ClaimData ClaimData
       {
          get
          {
-            return new ModelInput
+            return new ClaimData
             {
                MemberID = txtMemberID.Text,
                ClaimID = txtClaimID.Text,
@@ -98,8 +98,8 @@ namespace PendAdvisorClient
             txtDiagnosis2.Text = value?.Diagnosis2;
             txtPOS.Text = value?.POS;
             txtProcedureCode.Text = value?.ProcedureCode;
-            txtUnits.Text = value?.Units.ToString();
-            txtPrice.Text = value?.Price.ToString();
+            txtUnits.Text = value?.Units.ToString() ?? "0";
+            txtPrice.Text = value?.Price.ToString() ?? "0";
             txtPendReason.Text = value?.PendReason;
          }
       }
@@ -125,7 +125,7 @@ namespace PendAdvisorClient
             MessageBox.Show("Sorry, PendAdvisor service call failed!", "PendAdvisor Client", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
          }
-         var advice = JsonConvert.DeserializeObject<ModelOutput>(adviceJson);
+         var advice = JsonConvert.DeserializeObject<AdviceData>(adviceJson);
          ////Scores = new double[]
          ////         {
          ////            advice.ActionsAndScores.First(t => t.Action == "Release").Score,
@@ -133,7 +133,7 @@ namespace PendAdvisorClient
          ////            advice.ActionsAndScores.First(t => t.Action == "Reprocess").Score,
          ////            advice.ActionsAndScores.First(t => t.Action == "MedReview").Score
          ////         };
-         
+
          ////Scores = new double[]
          //// {
          ////            advice.Scores[0],
@@ -142,7 +142,7 @@ namespace PendAdvisorClient
          ////            advice.Scores[3]
          //// };
 
-         Scores = advice.Scores.Select(s => (double)s).ToArray();
+//         Scores = advice.Scores.Select(s => (double)s).ToArray();
 
      ///    btnClose.Enabled = advice.ActionsAndScores[0].Score > float.Parse(txtThreshold.Text);
       }
@@ -187,7 +187,7 @@ namespace PendAdvisorClient
          else //text dropped directly 
             jsonClaimData = e.Data.GetData(DataFormats.Text).ToString();
 
-         ClaimData = JsonConvert.DeserializeObject<ModelInput>(jsonClaimData);
+         ClaimData = JsonConvert.DeserializeObject<ClaimData>(jsonClaimData);
       }
 
       private void btnClaim_Click(object sender, EventArgs e)
