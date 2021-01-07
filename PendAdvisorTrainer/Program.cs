@@ -14,9 +14,9 @@ namespace PendAdvisorTrainer
    public class Program
    {
       private static readonly char sep = Path.DirectorySeparatorChar;
-      ////private static readonly string _dataPath = $"..{sep}..{sep}..{sep}Data{sep}TestClaims.csv";
+      private static readonly string _dataPath = $"..{sep}..{sep}..{sep}Data{sep}TestClaims.csv";
       ////private static readonly string _dataPath = $"..{sep}..{sep}..{sep}Data{sep}claimsPartialTraining1.csv";
-      private static readonly string _dataPath = $"..{sep}..{sep}..{sep}Data{sep}claimsFullTraining1.csv";
+      ////private static readonly string _dataPath = $"..{sep}..{sep}..{sep}Data{sep}claimsFullTraining1.csv";
       private static readonly bool _skipCrossValidation = true;
 
       private static MLContext _mlContext = new MLContext(seed: 1);
