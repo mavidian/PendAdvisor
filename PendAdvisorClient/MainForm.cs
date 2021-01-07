@@ -24,20 +24,23 @@ namespace PendAdvisorClient
          InitializeComponent();
 
          ClaimData = null;
-         ////Scores = new float[] { 96.2f, 2f, 1f, .8f };
-         ////Scores = new float[] { 20f, 25f, 10f, 45f };
          Scores = null;
          txtThreshold.Text = "90";
+
+         btnAdvice.Enabled = true;
       }
 
 
       /// <summary>
-      /// Write-only property containing the 4 score values for Release, Deny, Reprocess & MedReview respectively.
-      /// Note that the values are expressed as  percentages and not fractions.
+      /// The 4 score values for Release, Deny, Reprocess & MedReviewexpressed as percentages (and not fractions).
       /// Setting this property populates the grid; setting to null means reset.
       /// </summary>
       private float[] Scores
       {
+         get
+         {
+            return chartAdviceScores.Series[0].Points.Select(p => (float)p.YValues[0]).ToArray();
+         }
          set
          {
             // 0-Release, 1-Deny, 2-Reprocess, 3-MedReview
@@ -134,15 +137,24 @@ namespace PendAdvisorClient
                      advice.ActionsAndScores.First(t => t.Action == "MedReview").Score * 100f
                   };
 
-         btnApply.Enabled = advice.AdviceScore > float.Parse(txtThreshold.Text);
+         btnAdvice.Enabled = false;
+         btnApply.Enabled = advice.AdviceScore * 100f > float.Parse(txtThreshold.Text);
+         if (double.TryParse((txtThreshold.Text), out var threshold))
+         {
+            btnApply.Enabled = advice.AdviceScore * 100f > threshold;
+         }
+         else btnApply.Enabled = false;
       }
+
 
       private void txtThreshold_TextChanged(object sender, EventArgs e)
       {
          if (double.TryParse((txtThreshold.Text), out var threshold))
          {
             this.chartAdviceScores.ChartAreas[0].AxisY.MinorGrid.IntervalOffset = threshold;
+            btnApply.Enabled = Scores.Max() > threshold;
          }
+         else btnApply.Enabled = false;
       }
 
 
@@ -191,6 +203,7 @@ namespace PendAdvisorClient
       {
          ClaimData = null;
          Scores = null;
+         btnAdvice.Enabled = true;
       }
 
 
