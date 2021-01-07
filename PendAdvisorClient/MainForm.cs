@@ -45,15 +45,14 @@ namespace PendAdvisorClient
             Debug.Assert(value == null || value.Count() == 4);
             Debug.Assert(value == null || Math.Abs(value.Sum() - 100f) < .1);
             if (value == null)
-            {
+            {  // reset grid
                valuesToAssign = new float[] { 0f, 0f, 0f, 0f };
                chartAdviceScores.Series[0].Points[0].SetValueY(0f);
                lblRecommendation.Text = string.Empty;
                picMLBrain.Visible = true;
-
             }
             else
-            {
+            {  // populate grid
                valuesToAssign = value;
                var topIndex = valuesToAssign.ToList().IndexOf(valuesToAssign.Max());
                lblRecommendation.Text = $"Recommended action is {new List<string>{ "Release", "Deny", "Reprocess", "MedReview" }[topIndex]} with {valuesToAssign[topIndex]:#0.0}% confidence.";
@@ -146,20 +145,26 @@ namespace PendAdvisorClient
          }
       }
 
+
       private void flowpnlClaimData_DragEnter(object sender, DragEventArgs e)
       {
+         if (!picMLBrain.Visible)
+         {  // only allow dropping data before making call
+            e.Effect = DragDropEffects.None;
+            return;
+         }
+
          if (e.Data.GetDataPresent(DataFormats.FileDrop))
-         {
+         {  // file (with JSON claim data) being dropped
             e.Effect = DragDropEffects.Copy;
             _dropFormatIsFile = true;
          }
          else if (e.Data.GetDataPresent(DataFormats.Text))
-         {
+         {  // JSON claim data being dropped
             e.Effect = DragDropEffects.Copy;
             _dropFormatIsFile = false;
          }
-         else
-                  e.Effect = DragDropEffects.None;
+         else  e.Effect = DragDropEffects.None;
       }
 
       private bool _dropFormatIsFile;
@@ -181,11 +186,13 @@ namespace PendAdvisorClient
          ClaimData = JsonConvert.DeserializeObject<ClaimData>(jsonClaimData);
       }
 
+
       private void btnClaim_Click(object sender, EventArgs e)
       {
          ClaimData = null;
          Scores = null;
       }
+
 
       private void btnApply_Click(object sender, EventArgs e)
       {
