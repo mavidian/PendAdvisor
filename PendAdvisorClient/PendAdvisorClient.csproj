@@ -117,7 +117,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cloud_empty.png" />
+    <None Include="Resources\cloud_animating_gear.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

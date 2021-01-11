@@ -73,9 +73,9 @@ namespace PendAdvisorClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cloud_empty {
+        internal static System.Drawing.Bitmap cloud_animating_gear {
             get {
-                object obj = ResourceManager.GetObject("cloud_empty", resourceCulture);
+                object obj = ResourceManager.GetObject("cloud_animating_gear", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
