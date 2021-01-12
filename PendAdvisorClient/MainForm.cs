@@ -27,6 +27,17 @@ namespace PendAdvisorClient
          ClaimData = null;
          Scores = null;
          txtThreshold.Text = "90";
+
+         // Start on secondary monitor if available
+         if (Screen.AllScreens.Length > 1)
+         {
+            var workingArea = Screen.AllScreens[1].WorkingArea;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = workingArea.Location;
+            this.Top += (workingArea.Height - this.Height) / 2;
+            this.Left += (workingArea.Width - this.Width) / 2;
+
+         }
       }
 
 
