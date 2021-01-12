@@ -9,12 +9,12 @@ A hypothetical ML predictor to advise on the action to take on a pended medical 
 
 ## PendAdvisor ML Model
 
-The ML model depicted in this solution reflects oversimiplified medical claim scenario.
+The ML model depicted in this solution reflects an oversimiplified medical claim scenario.
 It is provided solely for demonstration purposes and is not intended as illustration of
 any medical claims processing system.
 
-Model input accepts the following claim attributes. Note that only those attributes that
-are marked with an asterisk play role in the prediction.
+Model input accepts the following claim attributes. Note that only those attributes
+marked with an asterisk play role in the ML prediction.
 
 * MemberID
 * ClaimID
@@ -28,15 +28,15 @@ are marked with an asterisk play role in the prediction.
 * Price*
 * PendReason*
 
-Model output provides a recommended action for the claim, which can one of:
+Model output provides a recommended action for the claim, which can be one of:
 
 - Release
 - Deny
 - Reprocess
 - MedReview
 
-More specifically, the output contains an array where each of the 4 possible actions is
-associated with a score, which is a value between 0 and 1. The recommended (predicted)
+More specifically, the output contains an array with the 4 possible actions and their
+associated scores. Each score is a value between 0 and 1. The recommended (predicted)
 action is the one with the highest score. The higher score value, the better odds that
 the prediction is correct. The total of all score values is always 1.
 
@@ -47,10 +47,10 @@ The PendAdvision solution consists of the following projects:
 1. **PendAdvisorModel**. A class library that contains the ML model and the prediction engine.
 2. **PendAdvisorModel.Tests**. Unit tests for the PendAdvisorModel project.
 3. **PendAdvisorTrainer**. A console application to train the ML model by consumming an arbitrary
-set of synthetic claim data.
-4. **PendAdvisor.API**. A simple Web API project that exposes REST API that accepts http POST requests
-containing the ML model inputs and returns htttp responses containing corresponding ML model outputs.
-5. **PendAdvisorTester**. A console application that consumes an arbitrary set of test claims and
+set of claims.
+4. **PendAdvisor.API**. A simple Web API that exposes REST API to accept http POST requests with
+claim data (ML Model inputs) and return htttp responses with corresponding recommendations (ML Model outputs).
+5. **PendAdvisorTester**. A console application that consumes an arbitrary set (batch) of test claims and
 provides a set of corresponding predictions.
 6. **PendAdvisorClient**. A desktop application (WinForms) and an http client that consumes REST API
 (like the one exposed by PendAdvisor.API) to obtain recommended actions for pended medical claims.
@@ -59,7 +59,7 @@ Note that PendAdvisor.API and PendAdvisorTester projects directly depend on the 
 implemented in PendAdvisorModel project. The engine runtime requires access to the
 trained model (MLModel.zip file), which is generated with each execution of PendAdvisorTrainer project.
 Therefore, in order for the newly trained model to be in effect, the PendAdvisor.API and PendAdvisorTester
-projects MUST BE REBUILT every time a new ML model is trained, i.e. after running PendAdvisorTrainer.exe.
+projects MUST BE REBUILT every time the ML model is trained, i.e. after running PendAdvisorTrainer.exe.
 
 ## Contributing
 
