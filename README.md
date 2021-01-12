@@ -40,7 +40,7 @@ associated with a score, which is a value between 0 and 1. The recommended (pred
 action is the one with the highest score. The higher score value, the better odds that
 the prediction is correct. The total of all score values is always 1.
 
-## Projecs Descriptions
+## Projects Descriptions
 
 The PendAdvision solution consists of the following projects:
 

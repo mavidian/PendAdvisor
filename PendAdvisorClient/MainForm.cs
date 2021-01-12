@@ -68,7 +68,7 @@ namespace PendAdvisorClient
             {  // populate grid
                valuesToAssign = value;
                var topIndex = valuesToAssign.ToList().IndexOf(valuesToAssign.Max());
-               lblRecommendation.Text = $"Recommended action is {new List<string>{ "Release", "Deny", "Reprocess", "MedReview" }[topIndex]} with {valuesToAssign[topIndex]:#0.0}% certainty.";
+               lblRecommendation.Text = $"Recommended action is {new List<string>{ "Release", "Deny", "Reprocess", "MedReview" }[topIndex]} with {valuesToAssign[topIndex]:#0.0}% confidence.";
                picMLBrain.Visible = false;
             }
             var pointsToSet = chartAdviceScores.Series[0].Points;
