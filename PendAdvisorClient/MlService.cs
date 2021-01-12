@@ -25,8 +25,16 @@ namespace PendAdvisorClient
             RequestUri = new Uri(ML_SERVICE_URL),
             Content = new StringContent(payload)
          };
-         request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
-         var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+          request.Content.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
+         HttpResponseMessage response;
+         try
+         {
+            response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+         }
+         catch //e.g. no service running, i.e. HttpRequestException: An error occurred while sending the request ---> WebException: Unable to connect to the remote server ---> SocketException: No connection could be made because the target machine actively refused it ...
+         {
+            return null;  ///TODO: add some diagnostics
+         }
          if (response.IsSuccessStatusCode) return await response.Content.ReadAsStringAsync();
          return null;  ///TODO: add some diagnostics
       }
