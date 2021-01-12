@@ -18,7 +18,7 @@ namespace PendAdvisorClient
          lblAction.Text = this.Text;
          this.Opacity = 0;
          await FadeIn();
-         await Task.Delay(1000);
+         await Task.Delay(600);
          await FadeOutAndClose();
       }
 
@@ -34,7 +34,7 @@ namespace PendAdvisorClient
          while (this.Opacity < 1)
          {
             await Task.Delay(2);
-            this.Opacity += (1d - this.Opacity) / 16d + .001d;
+            this.Opacity += (1d - this.Opacity) / 14d + .001d;
          }
       }
 
@@ -44,7 +44,7 @@ namespace PendAdvisorClient
          while (this.Opacity > 0)
          {
             await Task.Delay(16);
-            this.Opacity -= (1d - this.Opacity)/16d + .001d;
+            this.Opacity -= (1d - this.Opacity) / 14d + .001d;
          }
          this.Close();
       }

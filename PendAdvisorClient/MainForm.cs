@@ -56,7 +56,7 @@ namespace PendAdvisorClient
             // 0-Release, 1-Deny, 2-Reprocess, 3-MedReview
             float[] valuesToAssign;
             Debug.Assert(value == null || value.Count() == 4);
-            Debug.Assert(value == null || Math.Abs(value.Sum() - 100f) < .5);
+            Debug.Assert(value == null || Math.Abs(value.Sum() - 100f) < 1f);
             if (value == null)
             {  // reset grid
                valuesToAssign = new float[] { 0f, 0f, 0f, 0f };
@@ -68,7 +68,7 @@ namespace PendAdvisorClient
             {  // populate grid
                valuesToAssign = value;
                var topIndex = valuesToAssign.ToList().IndexOf(valuesToAssign.Max());
-               lblRecommendation.Text = $"Recommended action is {new List<string>{ "Release", "Deny", "Reprocess", "MedReview" }[topIndex]} with {valuesToAssign[topIndex]:#0.0}% confidence.";
+               lblRecommendation.Text = $"Recommended action is {new List<string>{ "Release", "Deny", "Reprocess", "MedReview" }[topIndex]} with {valuesToAssign[topIndex]:#0.0}% certainty.";
                picMLBrain.Visible = false;
             }
             var pointsToSet = chartAdviceScores.Series[0].Points;
