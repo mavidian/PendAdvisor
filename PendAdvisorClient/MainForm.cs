@@ -56,7 +56,7 @@ namespace PendAdvisorClient
             // 0-Release, 1-Deny, 2-Reprocess, 3-MedReview
             float[] valuesToAssign;
             Debug.Assert(value == null || value.Count() == 4);
-            Debug.Assert(value == null || Math.Abs(value.Sum() - 100f) < .1);
+            Debug.Assert(value == null || Math.Abs(value.Sum() - 100f) < .5);
             if (value == null)
             {  // reset grid
                valuesToAssign = new float[] { 0f, 0f, 0f, 0f };
@@ -212,6 +212,7 @@ namespace PendAdvisorClient
       {
          ClaimData = null;
          Scores = null;
+         btnApply.Enabled = false;
       }
 
 
